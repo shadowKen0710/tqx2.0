@@ -1,0 +1,1367 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GATC 参赛引导线框图</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #111;
+      background: #f4f4f4;
+    }
+    header {
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      border-bottom: 1px solid #999;
+      background: #fff;
+    }
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 42px;
+      padding: 4px 10px 4px 5px;
+      border: 1px solid #777;
+      cursor: pointer;
+      background: #fff;
+    }
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 1px solid #555;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 12px;
+      background: #222;
+    }
+    .user-name { font-weight: 700; }
+    .plan-badge {
+      padding: 3px 8px;
+      border: 1px solid #333;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      background: #eee;
+    }
+    button {
+      height: 36px;
+      padding: 0 14px;
+      border: 1px solid #333;
+      background: #fff;
+      cursor: pointer;
+    }
+    button:disabled {
+      color: #999;
+      border-color: #bbb;
+      background: #eee;
+      cursor: not-allowed;
+    }
+    .page {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: calc(100vh - 56px);
+    }
+    aside {
+      padding: 20px;
+      border-right: 1px solid #999;
+      background: #fafafa;
+    }
+    main { padding: 20px; }
+    .nav button {
+      width: 100%;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+    .nav-title {
+      margin: 22px 0 10px;
+      padding-top: 18px;
+      border-top: 1px solid #bbb;
+      font-size: 13px;
+      color: #666;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-title:first-child {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+    .nav button.active {
+      color: #fff;
+      background: #222;
+    }
+    .nav .subnav {
+      padding-left: 14px;
+      border-left: 2px solid #ccc;
+    }
+    .profile-layout {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 24px;
+    }
+    .avatar {
+      width: 112px;
+      height: 112px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      border: 1px dashed #555;
+      border-radius: 50%;
+      color: #666;
+      background: #f7f7f7;
+    }
+    .field {
+      display: grid;
+      grid-template-columns: 140px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .field input,
+    .field select {
+      width: 100%;
+      height: 38px;
+      padding: 0 10px;
+      border: 1px solid #777;
+      background: #fff;
+    }
+    .agent-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .agent-card {
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      border: 2px solid #555;
+      color: #eee;
+      background: #111;
+    }
+    .agent-card::after {
+      content: "";
+      position: absolute;
+      right: -1px;
+      bottom: -1px;
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, transparent 49%, #fff 50%);
+      pointer-events: none;
+    }
+    .agent-card-head,
+    .agent-card-actions,
+    .agent-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .agent-identity {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .agent-thumb {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #999;
+      color: #aaa;
+      background: #222;
+    }
+    .agent-card .status {
+      color: #eee;
+      border-color: #666;
+      background: #292929;
+    }
+    .agent-card button {
+      color: #eee;
+      border-color: #aaa;
+      background: #191919;
+    }
+    .agent-card button.primary {
+      color: #111;
+      background: #fff;
+    }
+    .agent-card button.danger {
+      color: #ffb1b1;
+      border-color: #8c4a4a;
+    }
+    .agent-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 22px 0 16px;
+    }
+    .agent-stat small {
+      display: block;
+      margin-bottom: 6px;
+      color: #999;
+    }
+    .agent-chart {
+      height: 150px;
+      padding: 10px;
+      border: 1px solid #333;
+      background: #050515;
+    }
+    .agent-chart svg {
+      width: 100%;
+      height: 100%;
+    }
+    .agent-summary {
+      justify-content: flex-start;
+      margin: 16px 0;
+    }
+    .agent-summary span {
+      padding: 8px 10px;
+      border: 1px solid #777;
+    }
+    .agent-card-actions {
+      justify-content: flex-end;
+      padding-right: 34px;
+    }
+    .account-panel {
+      padding: 22px;
+      color: #eee;
+      border: 2px solid #555;
+      background: #111;
+    }
+    .account-columns,
+    .account-card {
+      display: grid;
+      grid-template-columns: 1.2fr 1.15fr 1fr 1.25fr 1fr 1.1fr;
+      gap: 18px;
+      align-items: center;
+    }
+    .account-columns {
+      padding: 0 28px 14px;
+      color: #bbb;
+      text-align: center;
+    }
+    .account-card {
+      position: relative;
+      min-height: 92px;
+      margin: 14px 0;
+      padding: 18px 34px 18px 28px;
+      border: 2px solid #eee;
+      background: #151515;
+    }
+    .account-card::after {
+      content: "";
+      position: absolute;
+      right: -2px;
+      bottom: -2px;
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, transparent 49%, #fff 50%);
+      pointer-events: none;
+    }
+    .account-card > div {
+      text-align: center;
+    }
+    .account-card .account-name {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .account-card a {
+      color: #4e91ff;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .account-card button {
+      height: 28px;
+      padding: 0 8px;
+      color: #eee;
+      border-color: #777;
+      background: #222;
+    }
+    .account-panel .status {
+      color: #eee;
+      border-color: #666;
+      background: #292929;
+    }
+    .account-delete {
+      position: absolute;
+      right: 6px;
+      bottom: 2px;
+      z-index: 1;
+      color: #111;
+      font-size: 18px;
+    }
+    .account-add {
+      width: 100%;
+      margin-top: 14px;
+      color: #111;
+      background: #fff;
+    }
+    .workflow-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .workflow-tabs {
+      display: flex;
+      gap: 8px;
+    }
+    .workflow-tabs button.active {
+      color: #fff;
+      background: #222;
+    }
+    .workflow-panel {
+      overflow: hidden;
+      border: 2px solid #444;
+      color: #eee;
+      background: #101414;
+    }
+    .workflow-head,
+    .workflow-item {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) 220px 300px;
+      gap: 18px;
+      align-items: center;
+      padding: 17px 22px;
+    }
+    .workflow-head {
+      color: #aaa;
+      background: #222;
+    }
+    .workflow-item {
+      min-height: 78px;
+      border-top: 1px solid #242929;
+    }
+    .workflow-item:first-of-type { border-top: 0; }
+    .workflow-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .workflow-actions button {
+      min-width: 72px;
+      color: #eee;
+      border-color: #555;
+      border-radius: 20px;
+      background: #333;
+    }
+    .workflow-actions button.view {
+      color: #111;
+      background: #fff;
+    }
+    .workflow-actions button.calculate {
+      border-color: #1762ff;
+      background: transparent;
+    }
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 18px;
+      border-top: 1px solid #242929;
+    }
+    .pagination .current {
+      padding: 4px 9px;
+      border: 1px solid #2871ff;
+      border-radius: 4px;
+    }
+    .guide-modal {
+      width: min(680px, 100%);
+      overflow: hidden;
+      border: 2px solid #333;
+      background: #fff;
+    }
+    .guide-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 22px;
+      color: #fff;
+      background: #151515;
+    }
+    .guide-head h2,
+    .guide-head p { margin: 0 0 6px; }
+    .guide-head button {
+      color: #fff;
+      border-color: #777;
+      background: transparent;
+    }
+    .guide-progress-track {
+      height: 6px;
+      background: #ddd;
+    }
+    .guide-progress-bar {
+      height: 100%;
+      width: 16.666%;
+      background: #222;
+      transition: width .2s ease;
+    }
+    .guide-body { padding: 26px 28px; }
+    .guide-step-label {
+      color: #666;
+      font-size: 13px;
+      letter-spacing: .06em;
+    }
+    .guide-body h3 { margin: 8px 0 12px; font-size: 24px; }
+    .guide-body p { line-height: 1.7; }
+    .guide-route {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      margin: 22px 0;
+    }
+    .guide-route span {
+      padding: 8px 4px;
+      border: 1px solid #bbb;
+      color: #888;
+      font-size: 11px;
+      text-align: center;
+    }
+    .guide-route span.active {
+      color: #fff;
+      border-color: #222;
+      background: #222;
+    }
+    .guide-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 18px;
+      border-top: 1px solid #ddd;
+    }
+    .guide-actions-right { display: flex; gap: 8px; }
+    .guide-actions .primary {
+      color: #fff;
+      background: #222;
+    }
+    .section {
+      margin-bottom: 18px;
+      padding: 16px;
+      border: 1px solid #777;
+      background: #fff;
+    }
+    .section h2,
+    .section h3,
+    .section p { margin-top: 0; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .row:last-child { border-bottom: 0; }
+    .placeholder {
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed #777;
+      color: #555;
+      text-align: center;
+      padding: 18px;
+    }
+    .chart {
+      min-height: 220px;
+      border: 1px dashed #777;
+      padding: 16px;
+    }
+    .chart-line {
+      height: 150px;
+      border-left: 1px solid #999;
+      border-bottom: 1px solid #999;
+      position: relative;
+      margin-top: 20px;
+    }
+    .chart-line::after {
+      content: "净值曲线数据区域";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #555;
+    }
+    .metric {
+      display: inline-block;
+      min-width: 120px;
+      margin-right: 16px;
+      padding: 12px;
+      border: 1px solid #999;
+      background: #fafafa;
+    }
+    .status {
+      display: inline-block;
+      padding: 2px 8px;
+      border: 1px solid #777;
+      font-size: 12px;
+      background: #f7f7f7;
+    }
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .hidden { display: none; }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.25);
+      padding: 24px;
+    }
+    .modal-backdrop.active { display: flex; }
+    .modal {
+      width: min(720px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      padding: 20px;
+      border: 2px solid #333;
+      background: #fff;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 32px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .step:last-child { border-bottom: 0; }
+    .num {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #333;
+      border-radius: 50%;
+    }
+    .note {
+      padding: 10px;
+      border: 1px dashed #777;
+      background: #fafafa;
+      color: #333;
+    }
+    @media (max-width: 860px) {
+      .page { grid-template-columns: 1fr; }
+      aside { border-right: 0; border-bottom: 1px solid #999; }
+      .grid { grid-template-columns: 1fr; }
+      .agent-grid { grid-template-columns: 1fr; }
+      .agent-stats { grid-template-columns: 1fr 1fr; }
+      .account-columns { display: none; }
+      .account-card { grid-template-columns: 1fr 1fr; }
+      .account-card > div::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 4px;
+        color: #888;
+        font-size: 11px;
+      }
+      .workflow-toolbar { align-items: stretch; flex-direction: column; }
+      .workflow-head { display: none; }
+      .workflow-item { grid-template-columns: 1fr; gap: 8px; }
+      .workflow-item > div::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 4px;
+        color: #888;
+        font-size: 11px;
+      }
+      .workflow-actions { justify-content: flex-start; flex-wrap: wrap; }
+      .guide-route { grid-template-columns: repeat(3, 1fr); }
+      .guide-actions { align-items: stretch; flex-direction: column; }
+      .guide-actions-right { display: grid; grid-template-columns: 1fr 1fr; }
+      .guide-actions-right #guideNext { grid-column: 1 / -1; }
+      .profile-layout { grid-template-columns: 1fr; }
+      .field { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>TQX / 个人中心线框图</strong>
+    <div class="user-menu" onclick="showPage('profile')" role="button" tabindex="0" aria-label="打开个人资料">
+      <span class="user-avatar">YZ</span>
+      <span class="user-name">Yazide</span>
+      <span id="planBadge" class="plan-badge" title="当前订阅计划">Pro</span>
+    </div>
+  </header>
+
+  <div class="page">
+    <aside>
+      <div class="nav">
+        <div class="nav-title">个人中心</div>
+        <button data-page="profile" onclick="showPage('profile')">个人资料</button>
+        <button data-page="subscription" onclick="showPage('subscription')">我的订阅</button>
+        <button data-page="billing" onclick="showPage('billing')">账单记录</button>
+        <button data-page="compute" onclick="showPage('compute')">算力记录与储值</button>
+        <button data-page="notifications" onclick="showPage('notifications')">系统通知</button>
+        <button data-page="preferences" onclick="showPage('preferences')">偏好设定</button>
+
+        <div class="nav-title">我的参赛</div>
+        <div class="subnav">
+          <button data-page="dashboard" onclick="showPage('dashboard')">参赛概览</button>
+          <button data-page="accounts" onclick="showPage('accounts')">账户管理</button>
+          <button data-page="agents" onclick="showPage('agents')">Agent管理</button>
+          <button data-page="builder" onclick="showPage('builder')">工作流管理</button>
+          <button data-page="ranking" onclick="showPage('ranking')">积分排名</button>
+          <button data-page="awards" onclick="showPage('awards')">获奖记录</button>
+          <button data-page="archive" onclick="showPage('archive')">历史归档</button>
+          <button onclick="openOnboarding()">新手引导</button>
+          <button onclick="openChecklist()">参赛Checklist</button>
+        </div>
+      </div>
+    </aside>
+
+    <main>
+      <section id="profile" class="wire-page">
+        <div class="section">
+          <h2>个人资料</h2>
+          <p>管理个人身份信息、账户安全与交易经验。</p>
+        </div>
+        <div class="section profile-layout">
+          <div>
+            <div class="avatar">头像</div>
+            <button>上传新头像</button>
+          </div>
+          <div>
+            <div class="field">
+              <strong>昵称</strong>
+              <input value="Yazide" aria-label="昵称">
+              <button>更新</button>
+            </div>
+            <div class="field">
+              <strong>电子邮件</strong>
+              <input type="email" value="yazide@example.com" aria-label="电子邮件">
+              <button>验证 / 更新</button>
+            </div>
+            <div class="field">
+              <strong>登录密码</strong>
+              <span>••••••••••••</span>
+              <button>更新密码</button>
+            </div>
+          </div>
+        </div>
+        <div class="section">
+          <h3>交易熟练度问答</h3>
+          <p>用于了解你的交易经验，并提供更合适的产品与风险提示。</p>
+          <div class="field">
+            <strong>交易经验</strong>
+            <select aria-label="交易经验"><option>1–3 年</option><option>不足 1 年</option><option>3 年以上</option></select>
+            <button>编辑问答</button>
+          </div>
+          <div class="field">
+            <strong>熟练程度</strong>
+            <span>中级 · 最近更新：2026-07-10</span>
+            <button>重新评估</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="subscription" class="wire-page hidden">
+        <div class="section"><h2>我的订阅</h2><p>查看当前方案、权益及续订信息。</p></div>
+        <div class="section">
+          <h3>订阅详情</h3>
+          <div class="row"><span>当前方案</span><strong>TQX Pro</strong></div>
+          <div class="row"><span>订阅状态</span><span class="status">生效中</span></div>
+          <div class="row"><span>计费周期</span><span>每月</span></div>
+          <div class="row"><span>下次续订日期</span><span>2026-08-10</span></div>
+          <div class="row"><span>方案权益</span><span>高级工作流、更多 Agent 配额、优先算力</span></div>
+          <p><button>管理订阅</button> <button>变更方案</button></p>
+        </div>
+      </section>
+
+      <section id="billing" class="wire-page hidden">
+        <div class="section"><h2>账单记录</h2><p>查看订阅与储值相关的付款记录。</p></div>
+        <div class="section">
+          <div class="row"><strong>2026-07-10 · TQX Pro 月费</strong><span>HK$ 299 · <span class="status">已付款</span> <button>下载账单</button></span></div>
+          <div class="row"><strong>2026-06-18 · 算力储值</strong><span>HK$ 500 · <span class="status">已付款</span> <button>下载账单</button></span></div>
+          <div class="row"><strong>2026-06-10 · TQX Pro 月费</strong><span>HK$ 299 · <span class="status">已付款</span> <button>下载账单</button></span></div>
+        </div>
+      </section>
+
+      <section id="compute" class="wire-page hidden">
+        <div class="section"><h2>算力记录与储值</h2><p>追踪算力余额、消耗明细并进行储值。</p></div>
+        <div class="grid">
+          <div class="section"><h3>可用算力</h3><p><span class="metric">余额：8,420 CU</span></p><button>立即储值</button></div>
+          <div class="section"><h3>本月用量</h3><p><span class="metric">已使用：1,580 CU</span></p><button>查看用量报告</button></div>
+        </div>
+        <div class="section"><h3>算力记录</h3>
+          <div class="row"><span>2026-07-13 · Agent X01 策略运行</span><strong>-120 CU</strong></div>
+          <div class="row"><span>2026-07-12 · 工作流测试</span><strong>-45 CU</strong></div>
+          <div class="row"><span>2026-07-10 · 储值到账</span><strong>+5,000 CU</strong></div>
+        </div>
+      </section>
+
+      <section id="notifications" class="wire-page hidden">
+        <div class="section"><h2>系统通知</h2><p>接收账户、订阅、参赛与系统运行消息。</p></div>
+        <div class="section">
+          <div class="row"><span><strong>GATC 排名更新</strong><br>Agent X01 的实时排名已更新。</span><span class="status">未读</span></div>
+          <div class="row"><span><strong>算力余额提醒</strong><br>可用算力低于设定的提醒阈值。</span><span>2026-07-12</span></div>
+          <div class="row"><span><strong>订阅续订成功</strong><br>TQX Pro 已成功续订。</span><span>2026-07-10</span></div>
+          <p><button>全部标记为已读</button></p>
+        </div>
+      </section>
+
+      <section id="preferences" class="wire-page hidden">
+        <div class="section"><h2>偏好设定</h2><p>设定个人中心的显示语言。</p></div>
+        <div class="section">
+          <h3>语言</h3>
+          <label class="row"><span>繁体中文</span><input type="radio" name="language" checked></label>
+          <label class="row"><span>English</span><input type="radio" name="language"></label>
+          <p><button>保存偏好</button></p>
+        </div>
+      </section>
+
+      <section id="dashboard" class="wire-page hidden">
+        <div class="section">
+          <h2>我的参赛 / 参赛概览</h2>
+          <p>查看 GATC 参赛情况，并进入账户管理、Agent管理和参赛Checklist。</p>
+        </div>
+
+        <div class="grid">
+          <div class="section">
+            <h3>Welcome Back</h3>
+            <p>用户名称：Yazide</p>
+            <p>登录状态：已登录</p>
+            <button onclick="openChecklist()">查看参赛Checklist</button>
+          </div>
+          <div class="section">
+            <h3>GATC HK 2026</h3>
+            <div class="placeholder">赛事标识 / 赛事入口区域</div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="section">
+            <h3>Feed / 通知</h3>
+            <div class="row">
+              <span>完成参赛Checklist后即可提交 GATC 参赛</span>
+              <span class="status">提示</span>
+            </div>
+            <div class="row">
+              <span>当前最多可提交 3 个 Agent 参赛</span>
+              <span class="status">规则</span>
+            </div>
+            <div class="row">
+              <span>参赛数据将实时更新排名和净值曲线</span>
+              <span class="status">数据</span>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>账户与 Agent 快捷入口</h3>
+            <div class="row">
+              <span>账户管理：管理绑定账户</span>
+              <button onclick="showPage('accounts')">进入</button>
+            </div>
+            <div class="row">
+              <span>Agent管理：查看和编辑 Agent</span>
+              <button onclick="showPage('agents')">进入</button>
+            </div>
+            <div class="row">
+              <span>工作流管理：建立、检视和计算工作流</span>
+              <button onclick="showPage('builder')">进入</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>参赛 Agent 数据区</h3>
+          <div>
+            <span class="metric">Rank：496</span>
+            <span class="metric">Performance：23.4%</span>
+            <span class="metric">参赛 Agent：2 / 3</span>
+          </div>
+          <div class="chart">
+            <strong>Agent X01</strong>
+            <button onclick="showPage('agents')">Edit</button>
+            <div class="chart-line"></div>
+          </div>
+          <p class="note">空状态：若用户尚未提交参赛，显示“你还没有参赛 Agent”，并提供“创建 Agent”和“打开参赛Checklist”按钮。</p>
+        </div>
+      </section>
+
+      <section id="ranking" class="wire-page hidden">
+        <div class="section">
+          <h2>我的参赛 / 积分排名</h2>
+          <p>查看当前赛季的累积积分、排名变化与积分构成。</p>
+        </div>
+        <div class="grid">
+          <div class="section">
+            <h3>当前赛季</h3>
+            <p>GATC HK 2026 · 2026-07-01 至 2026-12-31</p>
+            <span class="status">进行中</span>
+          </div>
+          <div class="section">
+            <h3>我的累积积分</h3>
+            <span class="metric">12,680 分</span>
+            <span class="metric">当前排名：28</span>
+            <p>较上周上升 6 名</p>
+          </div>
+        </div>
+        <div class="section">
+          <h3>当前赛季积分榜</h3>
+          <div class="row"><strong>排名</strong><strong>参赛者 / Agent</strong><strong>累积积分</strong></div>
+          <div class="row"><span>1</span><span>Alpha Quant / AQ-01</span><strong>18,920</strong></div>
+          <div class="row"><span>2</span><span>Nova Lab / Nova X</span><strong>17,840</strong></div>
+          <div class="row"><span>3</span><span>Delta Team / DT-Pro</span><strong>16,510</strong></div>
+          <div class="row"><span>28</span><span><strong>Yazide / Agent X01</strong> <span class="status">我</span></span><strong>12,680</strong></div>
+          <p><button>查看完整排行榜</button></p>
+        </div>
+        <div class="section">
+          <h3>积分构成</h3>
+          <div class="row"><span>Agent X01 · 交易表现积分</span><strong>8,240 分</strong></div>
+          <div class="row"><span>Agent X02 · 交易表现积分</span><strong>3,940 分</strong></div>
+          <div class="row"><span>赛季任务奖励</span><strong>500 分</strong></div>
+        </div>
+      </section>
+
+      <section id="awards" class="wire-page hidden">
+        <div class="section">
+          <h2>我的参赛 / 获奖记录</h2>
+          <p>查看本赛季每个季度获得的奖励及领取状态。</p>
+        </div>
+        <div class="section">
+          <h3>GATC HK 2026 · 本赛季季度奖励</h3>
+          <div class="row">
+            <div><strong>第一季度 · 卓越表现奖</strong><p>季度积分排名第 12 名</p></div>
+            <div><span class="status">已领取</span> <button>查看奖励详情</button></div>
+          </div>
+          <div class="row">
+            <div><strong>第二季度 · Top 30 奖励</strong><p>季度积分排名第 28 名</p></div>
+            <div><span class="status">待领取</span> <button>领取奖励</button></div>
+          </div>
+          <div class="row">
+            <div><strong>第三季度</strong><p>季度进行中，奖励将在季度结束后结算。</p></div>
+            <span class="status">结算中</span>
+          </div>
+          <div class="row">
+            <div><strong>第四季度</strong><p>尚未开始。</p></div>
+            <span class="status">未开始</span>
+          </div>
+        </div>
+        <div class="section">
+          <h3>本赛季奖励统计</h3>
+          <span class="metric">已获奖励：2</span>
+          <span class="metric">待领取：1</span>
+          <span class="metric">奖金 / 权益：HK$ 3,000</span>
+        </div>
+      </section>
+
+      <section id="archive" class="wire-page hidden">
+        <div class="section">
+          <h2>我的参赛 / 历史归档</h2>
+          <p>按赛季查看往期最终排名、参赛 Agent 和获奖记录。</p>
+        </div>
+        <div class="section">
+          <div class="field">
+            <strong>选择赛季</strong>
+            <select aria-label="选择历史赛季">
+              <option>GATC 2025 冬季赛</option>
+              <option>GATC 2025 夏季赛</option>
+              <option>GATC 2024 年度赛</option>
+            </select>
+            <button>查看归档</button>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="section">
+            <h3>GATC 2025 冬季赛</h3>
+            <p>赛季状态：<span class="status">已结束</span></p>
+            <p>赛季时间：2025-10-01 至 2025-12-31</p>
+            <p>参赛 Agent：Agent X01、Agent X02</p>
+          </div>
+          <div class="section">
+            <h3>最终成绩</h3>
+            <span class="metric">最终排名：36</span>
+            <span class="metric">累积积分：9,840</span>
+            <p>最高季度排名：18</p>
+          </div>
+        </div>
+        <div class="section">
+          <h3>该赛季获奖记录</h3>
+          <div class="row"><span>第四季度 · Top 50 奖励</span><span><span class="status">已领取</span> <button>查看详情</button></span></div>
+          <div class="row"><span>赛季完成纪念徽章</span><span><span class="status">已获得</span> <button>查看详情</button></span></div>
+        </div>
+        <div class="section">
+          <h3>其他往期赛季</h3>
+          <div class="row"><span>GATC 2025 夏季赛 · 最终排名 52</span><button>打开归档</button></div>
+          <div class="row"><span>GATC 2024 年度赛 · 最终排名 81</span><button>打开归档</button></div>
+        </div>
+      </section>
+
+      <section id="accounts" class="wire-page hidden">
+        <div class="section">
+          <h2>账户管理</h2>
+          <p>管理交易账户、所属机构、绑定状态和 Agent 参赛入口。</p>
+        </div>
+        <div class="account-panel">
+          <div class="account-columns">
+            <strong>账户名称</strong><strong>所属机构</strong><strong>交易账户</strong><strong>绑定时间</strong><strong>参赛组别</strong><strong>参赛状态</strong>
+          </div>
+          <article class="account-card">
+            <div class="account-name" data-label="账户名称"><strong>TQX仿真 01</strong><button aria-label="编辑账户名称">↗</button></div>
+            <div data-label="所属机构">仿真盘</div>
+            <div data-label="交易账户">464</div>
+            <div data-label="绑定时间">2026-07-10<br>11:26:35</div>
+            <div data-label="参赛组别">—</div>
+            <div data-label="参赛状态"><a onclick="openChecklist()">提交Agent参赛</a></div>
+            <span class="account-delete" title="删除账户">🗑</span>
+          </article>
+          <article class="account-card">
+            <div class="account-name" data-label="账户名称"><strong>TQX仿真 02</strong><button aria-label="编辑账户名称">↗</button></div>
+            <div data-label="所属机构">仿真盘</div>
+            <div data-label="交易账户">363</div>
+            <div data-label="绑定时间">2026-06-03<br>17:03:37</div>
+            <div data-label="参赛组别">专业组</div>
+            <div data-label="参赛状态"><span class="status">比赛中</span></div>
+            <span class="account-delete" title="删除账户">🗑</span>
+          </article>
+          <article class="account-card">
+            <div class="account-name" data-label="账户名称"><strong>TQX仿真 03</strong><button aria-label="编辑账户名称">↗</button></div>
+            <div data-label="所属机构">仿真盘</div>
+            <div data-label="交易账户">344</div>
+            <div data-label="绑定时间">2026-05-28<br>14:30:57</div>
+            <div data-label="参赛组别">—</div>
+            <div data-label="参赛状态"><a onclick="openChecklist()">提交Agent参赛</a></div>
+            <span class="account-delete" title="删除账户">🗑</span>
+          </article>
+          <article class="account-card">
+            <div class="account-name" data-label="账户名称"><strong>TQX仿真 04</strong><button aria-label="编辑账户名称">↗</button></div>
+            <div data-label="所属机构">仿真盘</div>
+            <div data-label="交易账户">174</div>
+            <div data-label="绑定时间">2026-04-10<br>19:21:15</div>
+            <div data-label="参赛组别">公开组</div>
+            <div data-label="参赛状态"><span class="status">已退赛</span></div>
+            <span class="account-delete" title="删除账户">🗑</span>
+          </article>
+          <button class="account-add">+ 新增账户</button>
+          <button class="account-add">+ 新增仿真盘账户</button>
+        </div>
+      </section>
+
+      <section id="agents" class="wire-page hidden">
+        <div class="section">
+          <h2>Agent管理</h2>
+          <p>以卡片方式查看 Agent 的交易表现、参赛状态及快捷操作。</p>
+          <button onclick="showPage('builder')">+ 创建新 Agent</button>
+          <button onclick="openChecklist()">提交 Agent 参赛</button>
+        </div>
+        <div class="agent-grid">
+          <article class="agent-card">
+            <div class="agent-card-head">
+              <div class="agent-identity">
+                <div class="agent-thumb">X01</div>
+                <div><strong>Agent X01</strong><br><span class="status">主動退赛</span></div>
+              </div>
+              <button class="primary">分享邀请 »</button>
+            </div>
+            <div class="agent-stats">
+              <div class="agent-stat"><small>交易账户</small><strong>77</strong></div>
+              <div class="agent-stat"><small>账户权益</small><strong>10,470,710</strong></div>
+              <div class="agent-stat"><small>总权益</small><strong>10,470,706</strong></div>
+              <div class="agent-stat"><small>当前净值</small><strong>1.00</strong></div>
+              <div class="agent-stat"><small>单笔最大收益</small><strong>—</strong></div>
+              <div class="agent-stat"><small>单笔最大亏损</small><strong>—</strong></div>
+              <div class="agent-stat"><small>夏普比率</small><strong>—</strong></div>
+              <div class="agent-stat"><small>胜率 / 交易次数</small><strong>— / —</strong></div>
+            </div>
+            <div class="agent-chart" aria-label="Agent X01 净值曲线">
+              <svg viewBox="0 0 600 130" preserveAspectRatio="none" role="img">
+                <g stroke="#30303d" stroke-width="1"><line x1="0" y1="20" x2="600" y2="20"/><line x1="0" y1="65" x2="600" y2="65"/><line x1="0" y1="110" x2="600" y2="110"/></g>
+                <polyline points="0,65 80,65 160,64 240,66 320,64 400,65 480,63 540,65 600,64" fill="none" stroke="#eee" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="agent-summary"><span>组别：公开组</span><span>当前排名：—</span><span>累计积分：—</span></div>
+            <div class="agent-card-actions">
+              <button>查看详情</button><button>运行日志</button><button onclick="openChecklist()">再次参赛</button><button class="danger">删除</button>
+            </div>
+          </article>
+
+          <article class="agent-card">
+            <div class="agent-card-head">
+              <div class="agent-identity">
+                <div class="agent-thumb">X02</div>
+                <div><strong>Agent X02</strong><br><span class="status">比赛中</span></div>
+              </div>
+              <button class="primary">分享邀请 »</button>
+            </div>
+            <div class="agent-stats">
+              <div class="agent-stat"><small>交易账户</small><strong>403</strong></div>
+              <div class="agent-stat"><small>账户权益</small><strong>1,047,071</strong></div>
+              <div class="agent-stat"><small>总权益</small><strong>1,083,420</strong></div>
+              <div class="agent-stat"><small>当前净值</small><strong>1.084</strong></div>
+              <div class="agent-stat"><small>单笔最大收益</small><strong>12.6%</strong></div>
+              <div class="agent-stat"><small>单笔最大亏损</small><strong>-3.1%</strong></div>
+              <div class="agent-stat"><small>夏普比率</small><strong>1.42</strong></div>
+              <div class="agent-stat"><small>胜率 / 交易次数</small><strong>61% / 84</strong></div>
+            </div>
+            <div class="agent-chart" aria-label="Agent X02 净值曲线">
+              <svg viewBox="0 0 600 130" preserveAspectRatio="none" role="img">
+                <g stroke="#30303d" stroke-width="1"><line x1="0" y1="20" x2="600" y2="20"/><line x1="0" y1="65" x2="600" y2="65"/><line x1="0" y1="110" x2="600" y2="110"/></g>
+                <polyline points="0,105 55,100 110,93 160,96 215,78 270,82 325,64 380,68 430,43 485,48 540,26 600,18" fill="none" stroke="#35cbbb" stroke-width="3"/>
+              </svg>
+            </div>
+            <div class="agent-summary"><span>组别：专业组</span><span>当前排名：28</span><span>累计积分：8,240</span></div>
+            <div class="agent-card-actions">
+              <button>查看详情</button><button>运行日志</button><button onclick="openChecklist()">更换配置</button>
+            </div>
+          </article>
+
+          <article class="agent-card">
+            <div class="agent-card-head">
+              <div class="agent-identity">
+                <div class="agent-thumb">X03</div>
+                <div><strong>Agent X03</strong><br><span class="status">未参赛</span></div>
+              </div>
+              <button>编辑 Agent</button>
+            </div>
+            <div class="agent-stats">
+              <div class="agent-stat"><small>交易账户</small><strong>126</strong></div>
+              <div class="agent-stat"><small>账户权益</small><strong>520,000</strong></div>
+              <div class="agent-stat"><small>总权益</small><strong>531,400</strong></div>
+              <div class="agent-stat"><small>当前净值</small><strong>1.022</strong></div>
+              <div class="agent-stat"><small>单笔最大收益</small><strong>5.2%</strong></div>
+              <div class="agent-stat"><small>单笔最大亏损</small><strong>-2.4%</strong></div>
+              <div class="agent-stat"><small>夏普比率</small><strong>0.91</strong></div>
+              <div class="agent-stat"><small>胜率 / 交易次数</small><strong>54% / 39</strong></div>
+            </div>
+            <div class="agent-chart" aria-label="Agent X03 净值曲线">
+              <svg viewBox="0 0 600 130" preserveAspectRatio="none" role="img">
+                <g stroke="#30303d" stroke-width="1"><line x1="0" y1="20" x2="600" y2="20"/><line x1="0" y1="65" x2="600" y2="65"/><line x1="0" y1="110" x2="600" y2="110"/></g>
+                <polyline points="0,90 70,82 140,85 210,72 280,76 350,56 420,62 490,47 550,52 600,40" fill="none" stroke="#9c84ff" stroke-width="3"/>
+              </svg>
+            </div>
+            <div class="agent-summary"><span>组别：—</span><span>当前排名：—</span><span>累计积分：—</span></div>
+            <div class="agent-card-actions">
+              <button>查看详情</button><button>运行日志</button><button class="primary" onclick="openChecklist()">提交参赛</button><button class="danger">删除</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="builder" class="wire-page hidden">
+        <div class="section">
+          <h2>工作流管理</h2>
+          <p>建立和管理交易工作流，完成检视与计算后可用于创建 Agent。</p>
+        </div>
+        <div class="workflow-toolbar">
+          <div class="workflow-tabs">
+            <button>官方范本</button>
+            <button class="active">我建立的</button>
+          </div>
+          <button onclick="showWorkflowCreate()">＋ 建立工作流</button>
+        </div>
+        <div class="workflow-panel">
+          <div class="workflow-head"><strong>名称</strong><strong>最近更新时间</strong><strong>操作</strong></div>
+          <div class="workflow-item">
+            <div data-label="名称"><strong>GATC 趋势策略 3434</strong></div>
+            <div data-label="最近更新时间">2026/07/10 15:36:37</div>
+            <div class="workflow-actions" data-label="操作"><button class="view">检视</button><button class="calculate">◷ 计算</button><button>删除</button></div>
+          </div>
+          <div class="workflow-item">
+            <div data-label="名称"><strong>11-克隆 · 风控版</strong></div>
+            <div data-label="最近更新时间">2026/06/11 17:13:54</div>
+            <div class="workflow-actions" data-label="操作"><button class="view">检视</button><button class="calculate">◷ 计算</button><button>删除</button></div>
+          </div>
+          <div class="workflow-item">
+            <div data-label="名称"><strong>参赛01-克隆</strong></div>
+            <div data-label="最近更新时间">2026/06/01 19:26:24</div>
+            <div class="workflow-actions" data-label="操作"><button class="view">检视</button><button class="calculate">◷ 计算</button><button>删除</button></div>
+          </div>
+          <div class="workflow-item">
+            <div data-label="名称"><strong>525-1</strong></div>
+            <div data-label="最近更新时间">2026/05/29 14:35:10</div>
+            <div class="workflow-actions" data-label="操作"><button class="view">检视</button><button class="calculate">◷ 计算</button><button>删除</button></div>
+          </div>
+          <div class="workflow-item">
+            <div data-label="名称"><strong>比赛测试-克隆</strong></div>
+            <div data-label="最近更新时间">2026/04/02 10:25:42</div>
+            <div class="workflow-actions" data-label="操作"><button class="view">检视</button><button class="calculate">◷ 计算</button><button>删除</button></div>
+          </div>
+          <div class="pagination"><button>‹</button><span class="current">1</span><button>›</button></div>
+        </div>
+        <div id="workflowCreate" class="section hidden">
+          <h3>建立工作流</h3>
+          <div class="field"><strong>工作流名称</strong><input placeholder="请输入工作流名称"><span></span></div>
+          <div class="field"><strong>建立方式</strong><select><option>从空白工作流开始</option><option>从官方范本建立</option><option>克隆现有工作流</option></select><span></span></div>
+          <p><button>进入工作流编辑器</button> <button onclick="hideWorkflowCreate()">取消</button></p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="onboardingModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+    <div class="guide-modal">
+      <div class="guide-head">
+        <div>
+          <h2 id="guideTitle">GATC 新手引导</h2>
+          <p>从登录开始，带你完成首次 Agent 参赛。</p>
+        </div>
+        <button onclick="closeOnboarding()" aria-label="关闭新手引导">关闭</button>
+      </div>
+      <div class="guide-progress-track"><div id="guideProgress" class="guide-progress-bar"></div></div>
+      <div class="guide-body">
+        <span id="guideStepLabel" class="guide-step-label">步骤 1 / 6</span>
+        <h3 id="guideStepTitle">欢迎来到 TQX</h3>
+        <p id="guideStepText">你已成功登录。接下来只需完成账户绑定、工作流和 Agent 设置，即可提交 GATC 参赛。</p>
+        <div class="guide-route" aria-label="参赛引导进度">
+          <span data-guide-route="0" class="active">登录</span>
+          <span data-guide-route="1">账户</span>
+          <span data-guide-route="2">工作流</span>
+          <span data-guide-route="3">Agent</span>
+          <span data-guide-route="4">资格</span>
+          <span data-guide-route="5">提交</span>
+        </div>
+        <div id="guideTip" class="note">当前登录状态：已登录，可以继续下一步。</div>
+        <div class="guide-actions">
+          <button onclick="closeOnboarding()">稍后再说</button>
+          <div class="guide-actions-right">
+            <button id="guideBack" onclick="changeGuideStep(-1)" disabled>上一步</button>
+            <button id="guideVisit" onclick="visitGuidePage()">查看当前页面</button>
+            <button id="guideNext" class="primary" onclick="changeGuideStep(1)">下一步</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="checklistModal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="row">
+        <h2>参赛Checklist</h2>
+        <button onclick="closeChecklist()">关闭</button>
+      </div>
+
+      <div class="section">
+        <h3>参赛步骤</h3>
+        <div class="step">
+          <div class="num">1</div>
+          <div>
+            <strong>注册 / 登录 TQX 账户</strong>
+            <p>当前用户已登录。</p>
+          </div>
+          <span class="status">Done</span>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div>
+            <strong>绑定账户</strong>
+            <p>已有可用账户后，才可以创建和提交参赛 Agent。</p>
+          </div>
+          <button onclick="closeChecklist(); showPage('accounts')">去账户管理</button>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div>
+            <strong>创建 Agent</strong>
+            <p>通过工作流管理建立并计算工作流，这是 Agent 创建的必经流程。</p>
+          </div>
+          <button onclick="closeChecklist(); showPage('builder')">创建 Agent</button>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <div>
+            <strong>提交参赛</strong>
+            <p>在参赛Checklist内选择最多 3 个 Agent 参赛。无需审核，提交后立即参赛。</p>
+          </div>
+          <button onclick="showSubmit()">提交参赛</button>
+        </div>
+      </div>
+
+      <div id="submitPanel" class="section hidden">
+        <h3>提交 GATC 参赛</h3>
+        <p>请选择参赛 Agent，最多 3 个。已参赛后允许更换。</p>
+        <div class="row">
+          <label><input type="checkbox" checked> Agent X01</label>
+          <span class="status">已选</span>
+        </div>
+        <div class="row">
+          <label><input type="checkbox" checked> Agent X02</label>
+          <span class="status">已选</span>
+        </div>
+        <div class="row">
+          <label><input type="checkbox"> Agent X03</label>
+          <span class="status">可选</span>
+        </div>
+        <div class="row">
+          <label><input type="checkbox" disabled> Agent X04</label>
+          <span class="status">超过 3 个后不可选</span>
+        </div>
+        <div class="note">
+          提交后无需审核，仪表盘立即显示参赛状态、排名、Performance 和净值曲线。排名和数据实时更新。
+        </div>
+        <p>
+          <button onclick="showSuccess()">确认提交参赛</button>
+          <button onclick="closeChecklist()">取消</button>
+        </p>
+      </div>
+
+      <div id="successPanel" class="section hidden">
+        <h3>提交成功</h3>
+        <p>你的 Agent 已加入 GATC。返回仪表盘可查看实时排名、Performance 和净值曲线。</p>
+        <button onclick="closeChecklist(); showPage('dashboard')">返回仪表盘</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showPage(id) {
+      document.querySelectorAll('.wire-page').forEach(function(page) {
+        page.classList.add('hidden');
+      });
+      document.getElementById(id).classList.remove('hidden');
+      document.querySelectorAll('.nav button[data-page]').forEach(function(button) {
+        button.classList.toggle('active', button.dataset.page === id);
+      });
+      window.scrollTo(0, 0);
+    }
+    function openChecklist() {
+      document.getElementById('checklistModal').classList.add('active');
+    }
+    function closeChecklist() {
+      document.getElementById('checklistModal').classList.remove('active');
+      document.getElementById('submitPanel').classList.add('hidden');
+      document.getElementById('successPanel').classList.add('hidden');
+    }
+    function showSubmit() {
+      document.getElementById('submitPanel').classList.remove('hidden');
+      document.getElementById('successPanel').classList.add('hidden');
+    }
+    function showSuccess() {
+      document.getElementById('successPanel').classList.remove('hidden');
+    }
+    function showWorkflowCreate() {
+      document.getElementById('workflowCreate').classList.remove('hidden');
+    }
+    function hideWorkflowCreate() {
+      document.getElementById('workflowCreate').classList.add('hidden');
+    }
+    function setSubscriptionPlan(plan) {
+      var badge = document.getElementById('planBadge');
+      var hasPlan = plan === 'Basic' || plan === 'Pro';
+      badge.textContent = hasPlan ? plan : '';
+      badge.classList.toggle('hidden', !hasPlan);
+    }
+    var guideStep = 0;
+    var guideSteps = [
+      {
+        title: '欢迎来到 TQX',
+        text: '你已成功登录。接下来只需完成账户绑定、工作流和 Agent 设置，即可提交 GATC 参赛。',
+        tip: '当前登录状态：已登录，可以继续下一步。',
+        page: 'profile',
+        visit: '查看个人资料'
+      },
+      {
+        title: '绑定交易账户',
+        text: '进入账户管理，绑定一个可用的真实或仿真交易账户。参赛 Agent 必须关联可用账户。',
+        tip: '完成条件：至少有 1 个状态正常的交易账户。',
+        page: 'accounts',
+        visit: '去账户管理'
+      },
+      {
+        title: '建立并计算工作流',
+        text: '在工作流管理中选择官方范本或建立自己的策略，完成参数设置后运行一次计算。',
+        tip: '完成条件：工作流已保存，并成功完成计算。',
+        page: 'builder',
+        visit: '去工作流管理'
+      },
+      {
+        title: '创建你的 Agent',
+        text: '使用已计算的工作流创建 Agent，并检查其交易账户、策略指标和运行状态。',
+        tip: '完成条件：至少创建 1 个可提交参赛的 Agent。',
+        page: 'agents',
+        visit: '去Agent管理'
+      },
+      {
+        title: '检查参赛资格',
+        text: '确认账户有效、Agent 状态正常且参赛名额未满。每位用户最多可提交 3 个 Agent。',
+        tip: '检查完成后即可进入最后一步提交参赛。',
+        page: 'dashboard',
+        visit: '查看参赛概览'
+      },
+      {
+        title: '提交 Agent 参赛',
+        text: '打开参赛Checklist，选择要参加 GATC 的 Agent 并确认提交。提交后可在参赛概览查看排名和表现。',
+        tip: '准备完成：点击“打开参赛Checklist”完成首次参赛。',
+        page: 'checklist',
+        visit: '打开参赛Checklist'
+      }
+    ];
+    function renderGuideStep() {
+      var step = guideSteps[guideStep];
+      document.getElementById('guideStepLabel').textContent = '步骤 ' + (guideStep + 1) + ' / ' + guideSteps.length;
+      document.getElementById('guideStepTitle').textContent = step.title;
+      document.getElementById('guideStepText').textContent = step.text;
+      document.getElementById('guideTip').textContent = step.tip;
+      document.getElementById('guideProgress').style.width = ((guideStep + 1) / guideSteps.length * 100) + '%';
+      document.getElementById('guideBack').disabled = guideStep === 0;
+      document.getElementById('guideNext').textContent = guideStep === guideSteps.length - 1 ? '完成引导' : '下一步';
+      document.getElementById('guideVisit').textContent = step.visit;
+      document.querySelectorAll('[data-guide-route]').forEach(function(item, index) {
+        item.classList.toggle('active', index === guideStep);
+      });
+    }
+    function openOnboarding() {
+      guideStep = 0;
+      renderGuideStep();
+      document.getElementById('onboardingModal').classList.add('active');
+    }
+    function closeOnboarding() {
+      document.getElementById('onboardingModal').classList.remove('active');
+    }
+    function changeGuideStep(direction) {
+      if (guideStep === guideSteps.length - 1 && direction > 0) {
+        closeOnboarding();
+        openChecklist();
+        return;
+      }
+      guideStep = Math.max(0, Math.min(guideSteps.length - 1, guideStep + direction));
+      renderGuideStep();
+    }
+    function visitGuidePage() {
+      var page = guideSteps[guideStep].page;
+      closeOnboarding();
+      if (page === 'checklist') {
+        openChecklist();
+      } else {
+        showPage(page);
+      }
+    }
+    setSubscriptionPlan('Pro');
+    var initialPage = window.location.hash.slice(1);
+    showPage(document.getElementById(initialPage) ? initialPage : 'profile');
+    var isNewUser = true;
+    if (isNewUser) openOnboarding();
+  </script>
+</body>
+</html>
