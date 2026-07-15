@@ -21,6 +21,30 @@
       border-bottom: 1px solid #999;
       background: #fff;
     }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .language-switcher {
+      display: flex;
+      height: 36px;
+      padding: 3px;
+      border: 1px solid #777;
+      background: #f4f4f4;
+    }
+    .language-switcher button {
+      height: 28px;
+      min-width: 62px;
+      padding: 0 10px;
+      border: 0;
+      background: transparent;
+    }
+    .language-switcher button.active {
+      color: #fff;
+      background: #222;
+    }
+    .language-short { display: none; }
     .brand-logo {
       position: relative;
       width: 171px;
@@ -252,6 +276,7 @@
       padding-right: 34px;
     }
     .account-panel {
+      margin-bottom: 18px;
       padding: 22px;
       color: #eee;
       border: 2px solid #555;
@@ -444,7 +469,7 @@
       margin-top: 20px;
     }
     .chart-line::after {
-      content: "净值曲线数据区域";
+      content: attr(data-label);
       position: absolute;
       inset: 0;
       display: flex;
@@ -475,17 +500,6 @@
       padding-top: 20px;
       border-top: 1px solid #aaa;
     }
-    .registration-flow {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-    .registration-block {
-      padding: 16px;
-      border: 1px dashed #777;
-      background: #fafafa;
-    }
-    .registration-block h3 { margin-top: 0; }
     .status {
       display: inline-block;
       padding: 2px 8px;
@@ -578,7 +592,6 @@
       }
       .workflow-actions { justify-content: flex-start; flex-wrap: wrap; }
       .dashboard-links { grid-template-columns: 1fr; }
-      .registration-flow { grid-template-columns: 1fr; }
       .profile-layout { grid-template-columns: 1fr; }
       .field { grid-template-columns: 1fr; }
     }
@@ -596,6 +609,13 @@
       }
       .user-name,
       .plan-badge { display: none; }
+      .header-actions { gap: 6px; }
+      .language-switcher button {
+        min-width: 42px;
+        padding: 0 6px;
+      }
+      .language-switcher .language-long { display: none; }
+      .language-switcher .language-short { display: inline; }
     }
   </style>
 </head>
@@ -604,10 +624,16 @@
     <div class="brand-logo" aria-label="TQX">
       <img src="tqx-logo.png" alt="TQX">
     </div>
-    <div class="user-menu" onclick="showPage('profile')" role="button" tabindex="0" aria-label="打开个人资料">
-      <span class="user-avatar">YZ</span>
-      <span class="user-name">Yazide</span>
-      <span id="planBadge" class="plan-badge" title="当前订阅计划">Pro</span>
+    <div class="header-actions">
+      <div class="language-switcher" role="group" aria-label="语言选择">
+        <button id="language-zh" class="active" type="button" onclick="setLanguage('zh')" aria-pressed="true">中<span class="language-long">文</span></button>
+        <button id="language-en" type="button" onclick="setLanguage('en')" aria-pressed="false"><span class="language-long">English</span><span class="language-short">EN</span></button>
+      </div>
+      <div class="user-menu" onclick="showPage('profile')" role="button" tabindex="0" aria-label="打开个人资料">
+        <span class="user-avatar">YZ</span>
+        <span class="user-name">Yazide</span>
+        <span id="planBadge" class="plan-badge" title="当前订阅计划">Pro</span>
+      </div>
     </div>
   </header>
 
@@ -624,7 +650,7 @@
           <button data-page="dashboard" onclick="showPage('dashboard')">仪表盘</button>
           <button data-page="ranking" onclick="showPage('ranking')">积分排名</button>
           <button data-page="awards" onclick="showPage('awards')">获奖记录</button>
-          <button onclick="openChecklist()">参赛Checklist</button>
+          <button onclick="openChecklist()">参赛准备清单</button>
         </div>
       </div>
     </aside>
@@ -643,8 +669,8 @@
           <div>
             <div class="field">
               <strong>昵称</strong>
-              <input value="Yazide" aria-label="昵称">
-              <button>更新</button>
+              <span>Yazide</span>
+              <span class="status">不可修改</span>
             </div>
             <div class="field">
               <strong>电子邮件</strong>
@@ -677,7 +703,7 @@
           <p>偏好作为个人资料的一部分统一管理。</p>
           <div class="field">
             <strong>显示语言</strong>
-            <select aria-label="显示语言"><option>繁体中文</option><option>English</option></select>
+            <select id="displayLanguageSelect" aria-label="显示语言" onchange="setLanguage(this.value)"><option value="zh">繁体中文</option><option value="en">English</option></select>
             <button>保存偏好</button>
           </div>
         </div>
@@ -756,28 +782,12 @@
             <h3>Welcome Back</h3>
             <p>用户名称：Yazide</p>
             <p>登录状态：已登录</p>
-            <button onclick="openChecklist()">查看参赛Checklist</button>
+            <button onclick="openChecklist()">查看参赛准备清单</button>
           </div>
           <div class="section">
             <h3>GATC HK 2026</h3>
             <div class="placeholder">赛事标识 / 赛事入口区域</div>
           </div>
-        </div>
-
-        <div class="section">
-            <h3>Feed / 通知</h3>
-            <div class="row">
-              <span>完成参赛Checklist后即可提交 GATC 参赛</span>
-              <span class="status">提示</span>
-            </div>
-            <div class="row">
-              <span>当前最多可提交 3 个 Agent 参赛</span>
-              <span class="status">规则</span>
-            </div>
-            <div class="row">
-              <span>参赛数据将实时更新排名和净值曲线</span>
-              <span class="status">数据</span>
-            </div>
         </div>
 
         <div class="section">
@@ -797,9 +807,9 @@
           </div>
           <div class="chart">
             <strong>Agent X01</strong>
-            <div class="chart-line"></div>
+            <div class="chart-line" data-label="净值曲线数据区域"></div>
           </div>
-          <p class="note">空状态：若用户尚未提交参赛，显示“你还没有参赛 Agent”，并提供“打开参赛Checklist”按钮。</p>
+          <p class="note">空状态：若用户尚未提交参赛，显示“你还没有参赛 Agent”，并提供“打开参赛准备清单”按钮。</p>
         </div>
       </section>
 
@@ -873,33 +883,14 @@
       <section id="account-agent" class="wire-page hidden">
         <div class="section">
           <h2>账户与 Agent 管理</h2>
-          <p>在同一页面创建交易账户、管理 Agent 并提交 GATC 报名。</p>
-        </div>
-
-        <div id="accountAgentRegistration" class="section">
-          <h2>账户创建与 Agent 报名</h2>
-          <div class="registration-flow">
-            <div class="registration-block">
-              <h3>1. 创建或绑定交易账户</h3>
-              <div class="field"><strong>账户类型</strong><select><option>TQX 仿真盘</option><option>绑定已有账户</option></select><span></span></div>
-              <div class="field"><strong>账户名称</strong><input placeholder="请输入账户名称"><span></span></div>
-              <p><button>创建交易账户</button> <button>绑定已有账户</button></p>
-            </div>
-            <div class="registration-block">
-              <h3>2. 选择 Agent 并提交报名</h3>
-              <div class="field"><strong>交易账户</strong><select><option>TQX仿真 01 · 账户 464</option><option>TQX仿真 03 · 账户 344</option></select><span></span></div>
-              <div class="field"><strong>参赛 Agent</strong><select><option>Agent X03 · 未参赛</option><option>Agent X01 · 已退赛</option></select><button onclick="showPage('builder')">创建 Agent</button></div>
-              <div class="field"><strong>参赛组别</strong><select><option>公开组</option><option>专业组</option></select><span></span></div>
-              <p><button onclick="submitRegistration()">提交 Agent 报名</button></p>
-              <p class="note">每位用户最多提交 3 个 Agent，无需审核，提交后立即参赛。</p>
-              <p id="registrationSuccess" class="note hidden"><strong>报名成功：</strong>Agent X03 已加入 GATC，可前往仪表盘查看实时参赛数据。</p>
-            </div>
-          </div>
+          <p>按顺序完成：添加交易账户 → 前往工作流创建 Agent → 返回本页提交 Agent 报名。</p>
         </div>
 
         <div class="section">
-          <h2>交易账户列表</h2>
-          <p>查看所属机构、绑定状态以及每个账户的参赛情况。</p>
+          <h2>1. 账户管理</h2>
+          <p>必须先添加至少一个可用的实盘或仿真盘账户，报名时 Agent 需要绑定该账户。</p>
+          <button onclick="openAccountCreate('live')">+ 添加实盘账户</button>
+          <button onclick="openAccountCreate('simulation')">+ 添加仿真盘账户</button>
         </div>
         <div class="account-panel">
           <div class="account-columns">
@@ -911,7 +902,7 @@
             <div data-label="交易账户">464</div>
             <div data-label="绑定时间">2026-07-10<br>11:26:35</div>
             <div data-label="参赛组别">—</div>
-            <div data-label="参赛状态"><a onclick="focusRegistration()">提交 Agent 报名</a></div>
+            <div data-label="参赛状态"><span class="status">可绑定 Agent</span></div>
             <span class="account-delete" title="删除账户">🗑</span>
           </article>
           <article class="account-card">
@@ -929,7 +920,7 @@
             <div data-label="交易账户">344</div>
             <div data-label="绑定时间">2026-05-28<br>14:30:57</div>
             <div data-label="参赛组别">—</div>
-            <div data-label="参赛状态"><a onclick="focusRegistration()">提交 Agent 报名</a></div>
+            <div data-label="参赛状态"><span class="status">可绑定 Agent</span></div>
             <span class="account-delete" title="删除账户">🗑</span>
           </article>
           <article class="account-card">
@@ -941,15 +932,13 @@
             <div data-label="参赛状态"><span class="status">已退赛</span></div>
             <span class="account-delete" title="删除账户">🗑</span>
           </article>
-          <button class="account-add" onclick="focusRegistration()">+ 新增账户</button>
-          <button class="account-add" onclick="focusRegistration()">+ 新增仿真盘账户</button>
         </div>
 
-        <div class="section">
-          <h2>Agent 列表</h2>
-          <p>以卡片方式查看 Agent 的交易表现、参赛状态及快捷操作。</p>
-          <button onclick="showPage('builder')">+ 创建新 Agent</button>
-          <button onclick="focusRegistration()">提交 Agent 报名</button>
+        <div id="agentManagementSection" class="section">
+          <h2>2. Agent 管理与报名</h2>
+          <p>账户添加完成后，先在工作流管理中创建 Agent；创建完成后返回这里提交报名。</p>
+          <button onclick="showPage('builder')">去工作流创建 Agent</button>
+          <button onclick="openAgentRegistration()">提交 Agent 报名</button>
         </div>
         <div class="agent-grid">
           <article class="agent-card">
@@ -978,7 +967,7 @@
             </div>
             <div class="agent-summary"><span>组别：公开组</span><span>当前排名：—</span><span>累计积分：—</span></div>
             <div class="agent-card-actions">
-              <button>查看详情</button><button>运行日志</button><button onclick="focusRegistration()">再次报名</button><button class="danger">删除</button>
+              <button>查看详情</button><button>运行日志</button><button onclick="openAgentRegistration()">再次报名</button><button class="danger">删除</button>
             </div>
           </article>
 
@@ -1008,7 +997,7 @@
             </div>
             <div class="agent-summary"><span>组别：专业组</span><span>当前排名：28</span><span>累计积分：8,240</span></div>
             <div class="agent-card-actions">
-              <button>查看详情</button><button>运行日志</button><button onclick="openChecklist()">更换配置</button>
+              <button>查看详情</button><button>运行日志</button><button onclick="openAgentRegistration()">更换报名配置</button>
             </div>
           </article>
 
@@ -1038,7 +1027,7 @@
             </div>
             <div class="agent-summary"><span>组别：—</span><span>当前排名：—</span><span>累计积分：—</span></div>
             <div class="agent-card-actions">
-              <button>查看详情</button><button>运行日志</button><button class="primary" onclick="focusRegistration()">提交报名</button><button class="danger">删除</button>
+              <button>查看详情</button><button>运行日志</button><button class="primary" onclick="openAgentRegistration()">提交报名</button><button class="danger">删除</button>
             </div>
           </article>
         </div>
@@ -1048,6 +1037,7 @@
         <div class="section">
           <h2>工作流管理</h2>
           <p>建立和管理交易工作流，完成检视与计算后可用于创建 Agent。</p>
+          <button onclick="returnToAgentManagement()">← 返回账户与 Agent 管理</button>
         </div>
         <div class="workflow-toolbar">
           <div class="workflow-tabs">
@@ -1098,7 +1088,7 @@
   <div id="checklistModal" class="modal-backdrop" role="dialog" aria-modal="true">
     <div class="modal">
       <div class="row">
-        <h2>参赛Checklist</h2>
+        <h2>参赛准备清单</h2>
         <button onclick="closeChecklist()">关闭</button>
       </div>
 
@@ -1118,7 +1108,7 @@
             <strong>绑定账户</strong>
             <p>已有可用账户后，才可以创建和提交参赛 Agent。</p>
           </div>
-          <button onclick="closeChecklist(); focusRegistration()">去账户与 Agent 管理</button>
+          <button onclick="closeChecklist(); showPage('account-agent')">去添加账户</button>
         </div>
         <div class="step">
           <div class="num">3</div>
@@ -1132,49 +1122,352 @@
           <div class="num">4</div>
           <div>
             <strong>提交参赛</strong>
-            <p>在参赛Checklist内选择最多 3 个 Agent 参赛。无需审核，提交后立即参赛。</p>
+            <p>返回账户与 Agent 管理页，填写 Agent 名称、头像、绑定账户并选择工作流中已创建的 Agent。</p>
           </div>
-          <button onclick="showSubmit()">提交参赛</button>
+          <button onclick="closeChecklist(); openAgentRegistration()">提交 Agent 报名</button>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div id="submitPanel" class="section hidden">
-        <h3>提交 GATC 参赛</h3>
-        <p>请选择参赛 Agent，最多 3 个。已参赛后允许更换。</p>
-        <div class="row">
-          <label><input type="checkbox" checked> Agent X01</label>
-          <span class="status">已选</span>
-        </div>
-        <div class="row">
-          <label><input type="checkbox" checked> Agent X02</label>
-          <span class="status">已选</span>
-        </div>
-        <div class="row">
-          <label><input type="checkbox"> Agent X03</label>
-          <span class="status">可选</span>
-        </div>
-        <div class="row">
-          <label><input type="checkbox" disabled> Agent X04</label>
-          <span class="status">超过 3 个后不可选</span>
-        </div>
-        <div class="note">
-          提交后无需审核，仪表盘立即显示参赛状态、排名、Performance 和净值曲线。排名和数据实时更新。
-        </div>
-        <p>
-          <button onclick="showSuccess()">确认提交参赛</button>
-          <button onclick="closeChecklist()">取消</button>
-        </p>
+  <div id="accountCreateModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="accountCreateTitle">
+    <div class="modal">
+      <div class="row">
+        <h2 id="accountCreateTitle">添加交易账户</h2>
+        <button onclick="closeAccountCreate()">关闭</button>
       </div>
+      <div class="section">
+        <div class="field"><strong>账户类型</strong><select id="accountTypeSelect"><option value="live">实盘账户</option><option value="simulation">仿真盘账户</option></select><span></span></div>
+        <div class="field"><strong>账户名称</strong><input placeholder="请输入账户名称"><span></span></div>
+        <div class="field"><strong>交易账户</strong><input placeholder="请输入或绑定交易账户"><span></span></div>
+        <p><button onclick="submitAccountCreate()">确认添加账户</button></p>
+        <p id="accountCreateSuccess" class="note hidden">账户添加成功，可继续前往工作流创建 Agent。</p>
+      </div>
+    </div>
+  </div>
 
-      <div id="successPanel" class="section hidden">
-        <h3>提交成功</h3>
-        <p>你的 Agent 已加入 GATC。返回仪表盘可查看实时排名、Performance 和净值曲线。</p>
-        <button onclick="closeChecklist(); showPage('dashboard')">返回仪表盘</button>
+  <div id="agentRegistrationModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="agentRegistrationTitle">
+    <div class="modal">
+      <div class="row">
+        <h2 id="agentRegistrationTitle">提交 Agent 报名</h2>
+        <button onclick="closeAgentRegistration()">关闭</button>
+      </div>
+      <p class="note">提交前请确认：已添加可用的实盘或仿真盘账户，并已在工作流管理中创建 Agent。每位用户最多报名 3 个 Agent。</p>
+      <div class="section">
+        <div class="field"><strong>Agent 名称</strong><input value="Agent X03" aria-label="Agent 名称"><span></span></div>
+        <div class="field"><strong>Agent 头像</strong><input type="file" accept="image/*" aria-label="Agent 头像"><span></span></div>
+        <div class="field"><strong>绑定账户</strong><select><option>TQX仿真 01 · 账户 464</option><option>TQX仿真 03 · 账户 344</option></select><span></span></div>
+        <div class="field"><strong>已创建 Agent</strong><select><option>Agent X03 · GATC 趋势策略 3434</option><option>Agent X01 · 参赛01-克隆</option></select><button onclick="closeAgentRegistration(); showPage('builder')">去工作流创建</button></div>
+        <p><button onclick="submitAgentRegistration()">确认提交报名</button> <button onclick="closeAgentRegistration()">取消</button></p>
+        <p id="agentRegistrationSuccess" class="note hidden"><strong>报名成功：</strong>Agent X03 已加入 GATC，可前往仪表盘查看实时数据。</p>
       </div>
     </div>
   </div>
 
   <script>
+    var englishTranslations = {
+      'GATC 参赛引导线框图': 'GATC Competition Guide Wireframe',
+      '语言选择': 'Language selector',
+      '打开个人资料': 'Open profile',
+      '当前订阅计划': 'Current subscription plan',
+      '个人中心': 'Personal Center',
+      '个人资料': 'Profile',
+      '订阅与算力': 'Subscription & Compute',
+      '系统通知': 'Notifications',
+      '我的参赛': 'My Competition',
+      '仪表盘': 'Dashboard',
+      '积分排名': 'Points Ranking',
+      '获奖记录': 'Awards',
+      '参赛准备清单': 'Competition Checklist',
+      '管理个人身份信息、账户安全与交易经验。': 'Manage your identity, account security, and trading experience.',
+      '头像': 'Avatar',
+      '上传新头像': 'Upload New Avatar',
+      '昵称': 'Display Name',
+      '不可修改': 'Cannot be changed',
+      '电子邮件': 'Email',
+      '验证 / 更新': 'Verify / Update',
+      '登录密码': 'Password',
+      '更新密码': 'Update Password',
+      '交易熟练度问答': 'Trading Proficiency Questionnaire',
+      '用于了解你的交易经验，并提供更合适的产品与风险提示。': 'Helps us understand your trading experience and provide more relevant products and risk notices.',
+      '交易经验': 'Trading Experience',
+      '1–3 年': '1–3 years',
+      '不足 1 年': 'Less than 1 year',
+      '3 年以上': 'More than 3 years',
+      '编辑问答': 'Edit Answers',
+      '熟练程度': 'Proficiency Level',
+      '中级 · 最近更新：2026-07-10': 'Intermediate · Last updated: 2026-07-10',
+      '重新评估': 'Retake Assessment',
+      '偏好设定': 'Preferences',
+      '偏好作为个人资料的一部分统一管理。': 'Manage preferences as part of your profile.',
+      '显示语言': 'Display Language',
+      '繁体中文': 'Traditional Chinese',
+      '保存偏好': 'Save Preferences',
+      '统一管理订阅方案、账单、算力储值与使用记录。': 'Manage your plan, billing, compute top-ups, and usage history in one place.',
+      '订阅与算力分类': 'Subscription and compute categories',
+      '账单记录': 'Billing History',
+      '订阅详情': 'Subscription Details',
+      '当前方案': 'Current Plan',
+      '订阅状态': 'Subscription Status',
+      '生效中': 'Active',
+      '计费周期': 'Billing Cycle',
+      '每月': 'Monthly',
+      '下次续订日期': 'Next Renewal Date',
+      '方案权益': 'Plan Benefits',
+      '高级工作流、更多 Agent 配额、优先算力': 'Advanced workflows, higher Agent limits, and priority compute',
+      '管理订阅': 'Manage Subscription',
+      '变更方案': 'Change Plan',
+      '算力概览': 'Compute Overview',
+      '可用算力': 'Available Compute',
+      '本月已使用': 'Used This Month',
+      '立即储值': 'Top Up Now',
+      '查看用量报告': 'View Usage Report',
+      '算力记录': 'Compute History',
+      '2026-07-13 · Agent X01 策略运行': '2026-07-13 · Agent X01 strategy run',
+      '2026-07-12 · 工作流测试': '2026-07-12 · Workflow test',
+      '2026-07-10 · 储值到账': '2026-07-10 · Top-up received',
+      '订阅付款和算力储值账单统一展示，可按类型筛选。': 'Subscription payments and compute top-ups are shown together and can be filtered by type.',
+      '2026-07-10 · TQX Pro 月费': '2026-07-10 · TQX Pro monthly fee',
+      '2026-06-18 · 算力储值': '2026-06-18 · Compute top-up',
+      '2026-06-10 · TQX Pro 月费': '2026-06-10 · TQX Pro monthly fee',
+      '已付款': 'Paid',
+      '下载账单': 'Download Invoice',
+      '平台服务消息与大赛消息分开查看，避免参赛信息被日常通知淹没。': 'View platform and competition messages separately so important competition updates stay visible.',
+      '系统通知分类': 'Notification categories',
+      '平台通知': 'Platform',
+      '大赛通知': 'Competition',
+      '算力余额提醒': 'Compute Balance Alert',
+      '可用算力低于设定的提醒阈值。': 'Available compute has fallen below your alert threshold.',
+      '订阅续订成功': 'Subscription Renewed',
+      'TQX Pro 已成功续订。': 'TQX Pro was renewed successfully.',
+      '平台通知全部标记为已读': 'Mark All Platform Notifications as Read',
+      'GATC 排名更新': 'GATC Ranking Updated',
+      'Agent X01 的实时排名已更新。': "Agent X01's live ranking has been updated.",
+      '未读': 'Unread',
+      '参赛 Agent 更换成功': 'Competition Agent Changed',
+      'Agent X02 已替换为 Agent X03。': 'Agent X02 has been replaced by Agent X03.',
+      'GATC 参赛提交成功': 'GATC Entry Submitted',
+      '2 个 Agent 已加入本届大赛。': 'Two Agents have joined this competition.',
+      '大赛通知全部标记为已读': 'Mark All Competition Notifications as Read',
+      '我的参赛 / 仪表盘': 'My Competition / Dashboard',
+      '集中查看 GATC 参赛状态、实时排名、Performance 和净值曲线。': 'View your GATC entry status, live ranking, performance, and equity curve in one place.',
+      '用户名称：Yazide': 'User: Yazide',
+      '登录状态：已登录': 'Status: Signed in',
+      '查看参赛准备清单': 'View Competition Checklist',
+      '赛事标识 / 赛事入口区域': 'Competition identity / entry area',
+      '快捷入口': 'Quick Links',
+      '账户与 Agent 管理': 'Account & Agent Management',
+      '工作流管理': 'Workflow Management',
+      '参赛 Agent 数据区': 'Competition Agent Data',
+      '参赛 Agent：2 / 3': 'Competition Agents: 2 / 3',
+      '净值曲线数据区域': 'Equity curve data area',
+      '空状态：若用户尚未提交参赛，显示“你还没有参赛 Agent”，并提供“打开参赛准备清单”按钮。': 'Empty state: If no entry has been submitted, show “You do not have a competition Agent yet” with an “Open Competition Checklist” button.',
+      '我的参赛 / 积分排名': 'My Competition / Points Ranking',
+      '查看当前赛季的累积积分、排名变化与积分构成。': 'View cumulative points, ranking changes, and the points breakdown for the current season.',
+      '当前赛季': 'Current Season',
+      'GATC HK 2026 · 2026-07-01 至 2026-12-31': 'GATC HK 2026 · 2026-07-01 to 2026-12-31',
+      '进行中': 'In Progress',
+      '我的累积积分': 'My Cumulative Points',
+      '12,680 分': '12,680 pts',
+      '当前排名：28': 'Current Rank: 28',
+      '较上周上升 6 名': 'Up 6 places from last week',
+      '当前赛季积分榜': 'Current Season Leaderboard',
+      '排名': 'Rank',
+      '参赛者 / Agent': 'Participant / Agent',
+      '累积积分': 'Cumulative Points',
+      '我': 'Me',
+      '查看完整排行榜': 'View Full Leaderboard',
+      '积分构成': 'Points Breakdown',
+      'Agent X01 · 交易表现积分': 'Agent X01 · Trading performance',
+      'Agent X02 · 交易表现积分': 'Agent X02 · Trading performance',
+      '8,240 分': '8,240 pts',
+      '3,940 分': '3,940 pts',
+      '赛季任务奖励': 'Season mission rewards',
+      '500 分': '500 pts',
+      '我的参赛 / 获奖记录': 'My Competition / Awards',
+      '查看本赛季每个季度获得的奖励及领取状态。': 'View quarterly rewards and claim status for this season.',
+      'GATC HK 2026 · 本赛季季度奖励': 'GATC HK 2026 · Quarterly Rewards',
+      '第一季度 · 卓越表现奖': 'Q1 · Outstanding Performance Award',
+      '季度积分排名第 12 名': '12th in quarterly points',
+      '已领取': 'Claimed',
+      '查看奖励详情': 'View Reward Details',
+      '第二季度 · Top 30 奖励': 'Q2 · Top 30 Award',
+      '季度积分排名第 28 名': '28th in quarterly points',
+      '待领取': 'Ready to Claim',
+      '领取奖励': 'Claim Reward',
+      '第三季度': 'Q3',
+      '季度进行中，奖励将在季度结束后结算。': 'The quarter is in progress. Rewards will be settled after it ends.',
+      '结算中': 'Pending Settlement',
+      '第四季度': 'Q4',
+      '尚未开始。': 'Not started yet.',
+      '未开始': 'Not Started',
+      '本赛季奖励统计': 'Season Reward Summary',
+      '已获奖励：2': 'Rewards Earned: 2',
+      '待领取：1': 'Ready to Claim: 1',
+      '奖金 / 权益：HK$ 3,000': 'Cash / Benefits: HK$ 3,000',
+      '按顺序完成：添加交易账户 → 前往工作流创建 Agent → 返回本页提交 Agent 报名。': 'Complete these steps in order: add a trading account → create an Agent from a workflow → return here to submit the Agent entry.',
+      '1. 账户管理': '1. Account Management',
+      '必须先添加至少一个可用的实盘或仿真盘账户，报名时 Agent 需要绑定该账户。': 'Add at least one available live or simulation account first. Your Agent must be linked to it when entering.',
+      '+ 添加实盘账户': '+ Add Live Account',
+      '+ 添加仿真盘账户': '+ Add Simulation Account',
+      '账户名称': 'Account Name',
+      '所属机构': 'Institution',
+      '交易账户': 'Trading Account',
+      '绑定时间': 'Linked At',
+      '参赛组别': 'Competition Category',
+      '参赛状态': 'Entry Status',
+      '编辑账户名称': 'Edit account name',
+      'TQX仿真 01': 'TQX Simulation 01',
+      'TQX仿真 02': 'TQX Simulation 02',
+      'TQX仿真 03': 'TQX Simulation 03',
+      'TQX仿真 04': 'TQX Simulation 04',
+      '仿真盘': 'Simulation',
+      '专业组': 'Professional',
+      '公开组': 'Open',
+      '可绑定 Agent': 'Available for Agent',
+      '比赛中': 'Competing',
+      '已退赛': 'Withdrawn',
+      '删除账户': 'Delete account',
+      '2. Agent 管理与报名': '2. Agent Management & Entry',
+      '账户添加完成后，先在工作流管理中创建 Agent；创建完成后返回这里提交报名。': 'After adding an account, create an Agent in Workflow Management, then return here to submit the entry.',
+      '去工作流创建 Agent': 'Create Agent from Workflow',
+      '提交 Agent 报名': 'Submit Agent Entry',
+      '主動退赛': 'Withdrawn',
+      '分享邀请 »': 'Share Invite »',
+      '账户权益': 'Account Equity',
+      '总权益': 'Total Equity',
+      '当前净值': 'Current NAV',
+      '单笔最大收益': 'Best Trade',
+      '单笔最大亏损': 'Worst Trade',
+      '夏普比率': 'Sharpe Ratio',
+      '胜率 / 交易次数': 'Win Rate / Trades',
+      'Agent X01 净值曲线': 'Agent X01 equity curve',
+      'Agent X02 净值曲线': 'Agent X02 equity curve',
+      'Agent X03 净值曲线': 'Agent X03 equity curve',
+      '组别：公开组': 'Category: Open',
+      '组别：专业组': 'Category: Professional',
+      '组别：—': 'Category: —',
+      '当前排名：—': 'Current Rank: —',
+      '累计积分：—': 'Cumulative Points: —',
+      '累计积分：8,240': 'Cumulative Points: 8,240',
+      '查看详情': 'View Details',
+      '运行日志': 'Run Logs',
+      '再次报名': 'Enter Again',
+      '删除': 'Delete',
+      '更换报名配置': 'Change Entry Setup',
+      '未参赛': 'Not Entered',
+      '编辑 Agent': 'Edit Agent',
+      '提交报名': 'Submit Entry',
+      '建立和管理交易工作流，完成检视与计算后可用于创建 Agent。': 'Build and manage trading workflows. Review and calculate them before creating an Agent.',
+      '← 返回账户与 Agent 管理': '← Back to Account & Agent Management',
+      '官方范本': 'Official Templates',
+      '我建立的': 'My Workflows',
+      '＋ 建立工作流': '＋ Create Workflow',
+      '名称': 'Name',
+      '最近更新时间': 'Last Updated',
+      '操作': 'Actions',
+      'GATC 趋势策略 3434': 'GATC Trend Strategy 3434',
+      '11-克隆 · 风控版': '11 Clone · Risk Control',
+      '参赛01-克隆': 'Competition 01 Clone',
+      '比赛测试-克隆': 'Competition Test Clone',
+      '检视': 'View',
+      '◷ 计算': '◷ Calculate',
+      '建立工作流': 'Create Workflow',
+      '工作流名称': 'Workflow Name',
+      '请输入工作流名称': 'Enter a workflow name',
+      '建立方式': 'Creation Method',
+      '从空白工作流开始': 'Start with a blank workflow',
+      '从官方范本建立': 'Use an official template',
+      '克隆现有工作流': 'Clone an existing workflow',
+      '进入工作流编辑器': 'Open Workflow Editor',
+      '取消': 'Cancel',
+      '关闭': 'Close',
+      '参赛步骤': 'Entry Steps',
+      '注册 / 登录 TQX 账户': 'Register / Sign in to TQX',
+      '当前用户已登录。': 'The current user is signed in.',
+      '绑定账户': 'Link an Account',
+      '已有可用账户后，才可以创建和提交参赛 Agent。': 'You need an available account before creating and submitting a competition Agent.',
+      '去添加账户': 'Add Account',
+      '创建 Agent': 'Create Agent',
+      '通过工作流管理建立并计算工作流，这是 Agent 创建的必经流程。': 'Build and calculate a workflow in Workflow Management before creating an Agent.',
+      '提交参赛': 'Submit Entry',
+      '返回账户与 Agent 管理页，填写 Agent 名称、头像、绑定账户并选择工作流中已创建的 Agent。': 'Return to Account & Agent Management, enter the Agent name and avatar, link an account, and select an Agent created from a workflow.',
+      '添加交易账户': 'Add Trading Account',
+      '账户类型': 'Account Type',
+      '实盘账户': 'Live Account',
+      '仿真盘账户': 'Simulation Account',
+      '请输入账户名称': 'Enter an account name',
+      '请输入或绑定交易账户': 'Enter or link a trading account',
+      '确认添加账户': 'Confirm Account',
+      '账户添加成功，可继续前往工作流创建 Agent。': 'Account added. You can now create an Agent from a workflow.',
+      '提交前请确认：已添加可用的实盘或仿真盘账户，并已在工作流管理中创建 Agent。每位用户最多报名 3 个 Agent。': 'Before submitting, make sure you have added an available live or simulation account and created an Agent in Workflow Management. Each user may enter up to three Agents.',
+      'Agent 名称': 'Agent Name',
+      'Agent 头像': 'Agent Avatar',
+      '已创建 Agent': 'Created Agent',
+      'TQX仿真 01 · 账户 464': 'TQX Simulation 01 · Account 464',
+      'TQX仿真 03 · 账户 344': 'TQX Simulation 03 · Account 344',
+      'Agent X03 · GATC 趋势策略 3434': 'Agent X03 · GATC Trend Strategy 3434',
+      'Agent X01 · 参赛01-克隆': 'Agent X01 · Competition 01 Clone',
+      '去工作流创建': 'Create from Workflow',
+      '确认提交报名': 'Confirm Entry',
+      '报名成功：': 'Entry successful:',
+      'Agent X03 已加入 GATC，可前往仪表盘查看实时数据。': 'Agent X03 has joined GATC. View live data on the Dashboard.'
+    };
+    var originalText = new WeakMap();
+    var originalAttributes = new WeakMap();
+    var i18nAttributes = ['aria-label', 'title', 'placeholder', 'data-label'];
+
+    function captureOriginalLanguage() {
+      var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      var node;
+      while ((node = walker.nextNode())) {
+        if (!node.parentElement.closest('.language-switcher') && node.nodeValue.trim()) {
+          originalText.set(node, node.nodeValue);
+        }
+      }
+      document.querySelectorAll('*').forEach(function(element) {
+        var values = {};
+        i18nAttributes.forEach(function(attribute) {
+          if (element.hasAttribute(attribute)) values[attribute] = element.getAttribute(attribute);
+        });
+        if (Object.keys(values).length) originalAttributes.set(element, values);
+      });
+    }
+
+    function translateTextValue(value, language) {
+      if (language === 'zh') return value;
+      var trimmed = value.trim();
+      if (!trimmed || !englishTranslations[trimmed]) return value;
+      return value.replace(trimmed, englishTranslations[trimmed]);
+    }
+
+    function setLanguage(language) {
+      language = language === 'en' ? 'en' : 'zh';
+      document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
+      document.title = language === 'en' ? englishTranslations['GATC 参赛引导线框图'] : 'GATC 参赛引导线框图';
+      var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      var node;
+      while ((node = walker.nextNode())) {
+        if (originalText.has(node)) node.nodeValue = translateTextValue(originalText.get(node), language);
+      }
+      document.querySelectorAll('*').forEach(function(element) {
+        if (!originalAttributes.has(element)) return;
+        var values = originalAttributes.get(element);
+        Object.keys(values).forEach(function(attribute) {
+          element.setAttribute(attribute, translateTextValue(values[attribute], language));
+        });
+      });
+      ['zh', 'en'].forEach(function(code) {
+        var button = document.getElementById('language-' + code);
+        var active = code === language;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      var preferenceSelect = document.getElementById('displayLanguageSelect');
+      if (preferenceSelect) preferenceSelect.value = language;
+      try { localStorage.setItem('tqx-language', language); } catch (error) {}
+    }
+
     function showPage(id) {
       document.querySelectorAll('.wire-page').forEach(function(page) {
         page.classList.add('hidden');
@@ -1207,27 +1500,37 @@
       });
       document.getElementById('notificationPanel-' + id).classList.remove('hidden');
     }
-    function focusRegistration() {
-      showPage('account-agent');
-      document.getElementById('accountAgentRegistration').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    function submitRegistration() {
-      document.getElementById('registrationSuccess').classList.remove('hidden');
-    }
     function openChecklist() {
       document.getElementById('checklistModal').classList.add('active');
     }
     function closeChecklist() {
       document.getElementById('checklistModal').classList.remove('active');
-      document.getElementById('submitPanel').classList.add('hidden');
-      document.getElementById('successPanel').classList.add('hidden');
     }
-    function showSubmit() {
-      document.getElementById('submitPanel').classList.remove('hidden');
-      document.getElementById('successPanel').classList.add('hidden');
+    function openAccountCreate(type) {
+      document.getElementById('accountTypeSelect').value = type;
+      document.getElementById('accountCreateSuccess').classList.add('hidden');
+      document.getElementById('accountCreateModal').classList.add('active');
     }
-    function showSuccess() {
-      document.getElementById('successPanel').classList.remove('hidden');
+    function closeAccountCreate() {
+      document.getElementById('accountCreateModal').classList.remove('active');
+    }
+    function submitAccountCreate() {
+      document.getElementById('accountCreateSuccess').classList.remove('hidden');
+    }
+    function openAgentRegistration() {
+      showPage('account-agent');
+      document.getElementById('agentRegistrationSuccess').classList.add('hidden');
+      document.getElementById('agentRegistrationModal').classList.add('active');
+    }
+    function closeAgentRegistration() {
+      document.getElementById('agentRegistrationModal').classList.remove('active');
+    }
+    function submitAgentRegistration() {
+      document.getElementById('agentRegistrationSuccess').classList.remove('hidden');
+    }
+    function returnToAgentManagement() {
+      showPage('account-agent');
+      document.getElementById('agentManagementSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     function showWorkflowCreate() {
       document.getElementById('workflowCreate').classList.remove('hidden');
@@ -1242,6 +1545,12 @@
       badge.classList.toggle('hidden', !hasPlan);
     }
     setSubscriptionPlan('Pro');
+    captureOriginalLanguage();
+    var savedLanguage = 'zh';
+    try { savedLanguage = localStorage.getItem('tqx-language') || 'zh'; } catch (error) {}
+    var queryLanguage = new URLSearchParams(window.location.search).get('lang');
+    if (queryLanguage === 'en' || queryLanguage === 'zh') savedLanguage = queryLanguage;
+    setLanguage(savedLanguage);
     var initialPage = window.location.hash.slice(1);
     showPage(document.getElementById(initialPage) ? initialPage : 'profile');
   </script>
