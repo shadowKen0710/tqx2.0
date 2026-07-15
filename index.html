@@ -21,6 +21,22 @@
       border-bottom: 1px solid #999;
       background: #fff;
     }
+    .brand-logo {
+      position: relative;
+      width: 171px;
+      height: 44px;
+      overflow: hidden;
+      flex: 0 0 auto;
+      background: #101617;
+    }
+    .brand-logo img {
+      position: absolute;
+      top: -35px;
+      left: -199px;
+      width: 370px;
+      height: 166px;
+      max-width: none;
+    }
     .user-menu {
       display: flex;
       align-items: center;
@@ -382,77 +398,6 @@
       border: 1px solid #2871ff;
       border-radius: 4px;
     }
-    .guide-modal {
-      width: min(680px, 100%);
-      overflow: hidden;
-      border: 2px solid #333;
-      background: #fff;
-    }
-    .guide-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 20px 22px;
-      color: #fff;
-      background: #151515;
-    }
-    .guide-head h2,
-    .guide-head p { margin: 0 0 6px; }
-    .guide-head button {
-      color: #fff;
-      border-color: #777;
-      background: transparent;
-    }
-    .guide-progress-track {
-      height: 6px;
-      background: #ddd;
-    }
-    .guide-progress-bar {
-      height: 100%;
-      width: 16.666%;
-      background: #222;
-      transition: width .2s ease;
-    }
-    .guide-body { padding: 26px 28px; }
-    .guide-step-label {
-      color: #666;
-      font-size: 13px;
-      letter-spacing: .06em;
-    }
-    .guide-body h3 { margin: 8px 0 12px; font-size: 24px; }
-    .guide-body p { line-height: 1.7; }
-    .guide-route {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 6px;
-      margin: 22px 0;
-    }
-    .guide-route span {
-      padding: 8px 4px;
-      border: 1px solid #bbb;
-      color: #888;
-      font-size: 11px;
-      text-align: center;
-    }
-    .guide-route span.active {
-      color: #fff;
-      border-color: #222;
-      background: #222;
-    }
-    .guide-actions {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding-top: 18px;
-      border-top: 1px solid #ddd;
-    }
-    .guide-actions-right { display: flex; gap: 8px; }
-    .guide-actions .primary {
-      color: #fff;
-      background: #222;
-    }
     .section {
       margin-bottom: 18px;
       padding: 16px;
@@ -515,6 +460,16 @@
       border: 1px solid #999;
       background: #fafafa;
     }
+    .dashboard-links {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .dashboard-links button {
+      width: 100%;
+      height: 44px;
+      text-align: left;
+    }
     .status {
       display: inline-block;
       padding: 2px 8px;
@@ -526,6 +481,16 @@
       display: flex;
       gap: 8px;
       margin-bottom: 16px;
+      border-bottom: 1px solid #999;
+    }
+    .tabs button {
+      margin-bottom: -1px;
+      border-bottom-color: #999;
+    }
+    .tabs button.active {
+      font-weight: 700;
+      border-bottom: 3px solid #111;
+      background: #eee;
     }
     .hidden { display: none; }
     .modal-backdrop {
@@ -596,18 +561,32 @@
         font-size: 11px;
       }
       .workflow-actions { justify-content: flex-start; flex-wrap: wrap; }
-      .guide-route { grid-template-columns: repeat(3, 1fr); }
-      .guide-actions { align-items: stretch; flex-direction: column; }
-      .guide-actions-right { display: grid; grid-template-columns: 1fr 1fr; }
-      .guide-actions-right #guideNext { grid-column: 1 / -1; }
+      .dashboard-links { grid-template-columns: 1fr; }
       .profile-layout { grid-template-columns: 1fr; }
       .field { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      header { padding: 0 12px; }
+      .brand-logo {
+        width: 137px;
+        height: 38px;
+      }
+      .brand-logo img {
+        top: -28px;
+        left: -159px;
+        width: 296px;
+        height: auto;
+      }
+      .user-name,
+      .plan-badge { display: none; }
     }
   </style>
 </head>
 <body>
   <header>
-    <strong>TQX / 个人中心线框图</strong>
+    <div class="brand-logo" aria-label="TQX">
+      <img src="tqx-logo.png" alt="TQX">
+    </div>
     <div class="user-menu" onclick="showPage('profile')" role="button" tabindex="0" aria-label="打开个人资料">
       <span class="user-avatar">YZ</span>
       <span class="user-name">Yazide</span>
@@ -620,22 +599,14 @@
       <div class="nav">
         <div class="nav-title">个人中心</div>
         <button data-page="profile" onclick="showPage('profile')">个人资料</button>
-        <button data-page="subscription" onclick="showPage('subscription')">我的订阅</button>
-        <button data-page="billing" onclick="showPage('billing')">账单记录</button>
-        <button data-page="compute" onclick="showPage('compute')">算力记录与储值</button>
+        <button data-page="subscription-compute" onclick="showPage('subscription-compute')">订阅与算力</button>
         <button data-page="notifications" onclick="showPage('notifications')">系统通知</button>
-        <button data-page="preferences" onclick="showPage('preferences')">偏好设定</button>
 
         <div class="nav-title">我的参赛</div>
         <div class="subnav">
-          <button data-page="dashboard" onclick="showPage('dashboard')">参赛概览</button>
-          <button data-page="accounts" onclick="showPage('accounts')">账户管理</button>
-          <button data-page="agents" onclick="showPage('agents')">Agent管理</button>
-          <button data-page="builder" onclick="showPage('builder')">工作流管理</button>
+          <button data-page="dashboard" onclick="showPage('dashboard')">仪表盘</button>
           <button data-page="ranking" onclick="showPage('ranking')">积分排名</button>
           <button data-page="awards" onclick="showPage('awards')">获奖记录</button>
-          <button data-page="archive" onclick="showPage('archive')">历史归档</button>
-          <button onclick="openOnboarding()">新手引导</button>
           <button onclick="openChecklist()">参赛Checklist</button>
         </div>
       </div>
@@ -684,11 +655,26 @@
             <button>重新评估</button>
           </div>
         </div>
+        <div class="section">
+          <h3>偏好设定</h3>
+          <p>偏好作为个人资料的一部分统一管理。</p>
+          <div class="field">
+            <strong>显示语言</strong>
+            <select aria-label="显示语言"><option>繁体中文</option><option>English</option></select>
+            <button>保存偏好</button>
+          </div>
+        </div>
       </section>
 
-      <section id="subscription" class="wire-page hidden">
-        <div class="section"><h2>我的订阅</h2><p>查看当前方案、权益及续订信息。</p></div>
-        <div class="section">
+      <section id="subscription-compute" class="wire-page hidden">
+        <div class="section"><h2>订阅与算力</h2><p>统一管理订阅方案、账单、算力储值与使用记录。</p></div>
+        <div class="tabs" role="tablist" aria-label="订阅与算力分类">
+          <button id="accountTab-subscription" class="active" role="tab" aria-selected="true" onclick="showAccountTab('subscription')">订阅方案</button>
+          <button id="accountTab-billing" role="tab" aria-selected="false" onclick="showAccountTab('billing')">账单记录</button>
+          <button id="accountTab-compute" role="tab" aria-selected="false" onclick="showAccountTab('compute')">算力储值与记录</button>
+        </div>
+
+        <div id="accountPanel-subscription" class="subscription-panel section" role="tabpanel">
           <h3>订阅详情</h3>
           <div class="row"><span>当前方案</span><strong>TQX Pro</strong></div>
           <div class="row"><span>订阅状态</span><span class="status">生效中</span></div>
@@ -697,54 +683,53 @@
           <div class="row"><span>方案权益</span><span>高级工作流、更多 Agent 配额、优先算力</span></div>
           <p><button>管理订阅</button> <button>变更方案</button></p>
         </div>
-      </section>
 
-      <section id="billing" class="wire-page hidden">
-        <div class="section"><h2>账单记录</h2><p>查看订阅与储值相关的付款记录。</p></div>
-        <div class="section">
+        <div id="accountPanel-billing" class="subscription-panel section hidden" role="tabpanel">
+          <h3>账单记录</h3>
+          <p>订阅付款和算力储值账单统一展示，可按类型筛选。</p>
           <div class="row"><strong>2026-07-10 · TQX Pro 月费</strong><span>HK$ 299 · <span class="status">已付款</span> <button>下载账单</button></span></div>
           <div class="row"><strong>2026-06-18 · 算力储值</strong><span>HK$ 500 · <span class="status">已付款</span> <button>下载账单</button></span></div>
           <div class="row"><strong>2026-06-10 · TQX Pro 月费</strong><span>HK$ 299 · <span class="status">已付款</span> <button>下载账单</button></span></div>
         </div>
-      </section>
 
-      <section id="compute" class="wire-page hidden">
-        <div class="section"><h2>算力记录与储值</h2><p>追踪算力余额、消耗明细并进行储值。</p></div>
-        <div class="grid">
-          <div class="section"><h3>可用算力</h3><p><span class="metric">余额：8,420 CU</span></p><button>立即储值</button></div>
-          <div class="section"><h3>本月用量</h3><p><span class="metric">已使用：1,580 CU</span></p><button>查看用量报告</button></div>
-        </div>
-        <div class="section"><h3>算力记录</h3>
-          <div class="row"><span>2026-07-13 · Agent X01 策略运行</span><strong>-120 CU</strong></div>
-          <div class="row"><span>2026-07-12 · 工作流测试</span><strong>-45 CU</strong></div>
-          <div class="row"><span>2026-07-10 · 储值到账</span><strong>+5,000 CU</strong></div>
+        <div id="accountPanel-compute" class="subscription-panel hidden" role="tabpanel">
+          <div class="grid">
+            <div class="section"><h3>可用算力</h3><p><span class="metric">余额：8,420 CU</span></p><button>立即储值</button></div>
+            <div class="section"><h3>本月用量</h3><p><span class="metric">已使用：1,580 CU</span></p><button>查看用量报告</button></div>
+          </div>
+          <div class="section"><h3>算力记录</h3>
+            <div class="row"><span>2026-07-13 · Agent X01 策略运行</span><strong>-120 CU</strong></div>
+            <div class="row"><span>2026-07-12 · 工作流测试</span><strong>-45 CU</strong></div>
+            <div class="row"><span>2026-07-10 · 储值到账</span><strong>+5,000 CU</strong></div>
+          </div>
         </div>
       </section>
 
       <section id="notifications" class="wire-page hidden">
-        <div class="section"><h2>系统通知</h2><p>接收账户、订阅、参赛与系统运行消息。</p></div>
-        <div class="section">
-          <div class="row"><span><strong>GATC 排名更新</strong><br>Agent X01 的实时排名已更新。</span><span class="status">未读</span></div>
+        <div class="section"><h2>系统通知</h2><p>平台服务消息与大赛消息分开查看，避免参赛信息被日常通知淹没。</p></div>
+        <div class="tabs" role="tablist" aria-label="系统通知分类">
+          <button id="notificationTab-platform" class="active" role="tab" aria-selected="true" onclick="showNotificationTab('platform')">平台通知 <span class="status">2</span></button>
+          <button id="notificationTab-competition" role="tab" aria-selected="false" onclick="showNotificationTab('competition')">大赛通知 <span class="status">1</span></button>
+        </div>
+        <div id="notificationPanel-platform" class="notification-panel section" role="tabpanel">
+          <h3>平台通知</h3>
           <div class="row"><span><strong>算力余额提醒</strong><br>可用算力低于设定的提醒阈值。</span><span>2026-07-12</span></div>
           <div class="row"><span><strong>订阅续订成功</strong><br>TQX Pro 已成功续订。</span><span>2026-07-10</span></div>
-          <p><button>全部标记为已读</button></p>
+          <p><button>平台通知全部标记为已读</button></p>
         </div>
-      </section>
-
-      <section id="preferences" class="wire-page hidden">
-        <div class="section"><h2>偏好设定</h2><p>设定个人中心的显示语言。</p></div>
-        <div class="section">
-          <h3>语言</h3>
-          <label class="row"><span>繁体中文</span><input type="radio" name="language" checked></label>
-          <label class="row"><span>English</span><input type="radio" name="language"></label>
-          <p><button>保存偏好</button></p>
+        <div id="notificationPanel-competition" class="notification-panel section hidden" role="tabpanel">
+          <h3>大赛通知</h3>
+          <div class="row"><span><strong>GATC 排名更新</strong><br>Agent X01 的实时排名已更新。</span><span class="status">未读</span></div>
+          <div class="row"><span><strong>参赛 Agent 更换成功</strong><br>Agent X02 已替换为 Agent X03。</span><span>2026-07-11</span></div>
+          <div class="row"><span><strong>GATC 参赛提交成功</strong><br>2 个 Agent 已加入本届大赛。</span><span>2026-07-10</span></div>
+          <p><button>大赛通知全部标记为已读</button></p>
         </div>
       </section>
 
       <section id="dashboard" class="wire-page hidden">
         <div class="section">
-          <h2>我的参赛 / 参赛概览</h2>
-          <p>查看 GATC 参赛情况，并进入账户管理、Agent管理和参赛Checklist。</p>
+          <h2>我的参赛 / 仪表盘</h2>
+          <p>集中查看 GATC 参赛状态、实时排名、Performance 和净值曲线。</p>
         </div>
 
         <div class="grid">
@@ -760,8 +745,7 @@
           </div>
         </div>
 
-        <div class="grid">
-          <div class="section">
+        <div class="section">
             <h3>Feed / 通知</h3>
             <div class="row">
               <span>完成参赛Checklist后即可提交 GATC 参赛</span>
@@ -775,22 +759,14 @@
               <span>参赛数据将实时更新排名和净值曲线</span>
               <span class="status">数据</span>
             </div>
-          </div>
+        </div>
 
-          <div class="section">
-            <h3>账户与 Agent 快捷入口</h3>
-            <div class="row">
-              <span>账户管理：管理绑定账户</span>
-              <button onclick="showPage('accounts')">进入</button>
-            </div>
-            <div class="row">
-              <span>Agent管理：查看和编辑 Agent</span>
-              <button onclick="showPage('agents')">进入</button>
-            </div>
-            <div class="row">
-              <span>工作流管理：建立、检视和计算工作流</span>
-              <button onclick="showPage('builder')">进入</button>
-            </div>
+        <div class="section">
+          <h3>快捷入口</h3>
+          <div class="dashboard-links">
+            <button onclick="showPage('accounts')">账户管理</button>
+            <button onclick="showPage('agents')">Agent 管理</button>
+            <button onclick="showPage('builder')">工作流管理</button>
           </div>
         </div>
 
@@ -803,10 +779,9 @@
           </div>
           <div class="chart">
             <strong>Agent X01</strong>
-            <button onclick="showPage('agents')">Edit</button>
             <div class="chart-line"></div>
           </div>
-          <p class="note">空状态：若用户尚未提交参赛，显示“你还没有参赛 Agent”，并提供“创建 Agent”和“打开参赛Checklist”按钮。</p>
+          <p class="note">空状态：若用户尚未提交参赛，显示“你还没有参赛 Agent”，并提供“打开参赛Checklist”按钮。</p>
         </div>
       </section>
 
@@ -874,48 +849,6 @@
           <span class="metric">已获奖励：2</span>
           <span class="metric">待领取：1</span>
           <span class="metric">奖金 / 权益：HK$ 3,000</span>
-        </div>
-      </section>
-
-      <section id="archive" class="wire-page hidden">
-        <div class="section">
-          <h2>我的参赛 / 历史归档</h2>
-          <p>按赛季查看往期最终排名、参赛 Agent 和获奖记录。</p>
-        </div>
-        <div class="section">
-          <div class="field">
-            <strong>选择赛季</strong>
-            <select aria-label="选择历史赛季">
-              <option>GATC 2025 冬季赛</option>
-              <option>GATC 2025 夏季赛</option>
-              <option>GATC 2024 年度赛</option>
-            </select>
-            <button>查看归档</button>
-          </div>
-        </div>
-        <div class="grid">
-          <div class="section">
-            <h3>GATC 2025 冬季赛</h3>
-            <p>赛季状态：<span class="status">已结束</span></p>
-            <p>赛季时间：2025-10-01 至 2025-12-31</p>
-            <p>参赛 Agent：Agent X01、Agent X02</p>
-          </div>
-          <div class="section">
-            <h3>最终成绩</h3>
-            <span class="metric">最终排名：36</span>
-            <span class="metric">累积积分：9,840</span>
-            <p>最高季度排名：18</p>
-          </div>
-        </div>
-        <div class="section">
-          <h3>该赛季获奖记录</h3>
-          <div class="row"><span>第四季度 · Top 50 奖励</span><span><span class="status">已领取</span> <button>查看详情</button></span></div>
-          <div class="row"><span>赛季完成纪念徽章</span><span><span class="status">已获得</span> <button>查看详情</button></span></div>
-        </div>
-        <div class="section">
-          <h3>其他往期赛季</h3>
-          <div class="row"><span>GATC 2025 夏季赛 · 最终排名 52</span><button>打开归档</button></div>
-          <div class="row"><span>GATC 2024 年度赛 · 最终排名 81</span><button>打开归档</button></div>
         </div>
       </section>
 
@@ -1120,41 +1053,6 @@
     </main>
   </div>
 
-  <div id="onboardingModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
-    <div class="guide-modal">
-      <div class="guide-head">
-        <div>
-          <h2 id="guideTitle">GATC 新手引导</h2>
-          <p>从登录开始，带你完成首次 Agent 参赛。</p>
-        </div>
-        <button onclick="closeOnboarding()" aria-label="关闭新手引导">关闭</button>
-      </div>
-      <div class="guide-progress-track"><div id="guideProgress" class="guide-progress-bar"></div></div>
-      <div class="guide-body">
-        <span id="guideStepLabel" class="guide-step-label">步骤 1 / 6</span>
-        <h3 id="guideStepTitle">欢迎来到 TQX</h3>
-        <p id="guideStepText">你已成功登录。接下来只需完成账户绑定、工作流和 Agent 设置，即可提交 GATC 参赛。</p>
-        <div class="guide-route" aria-label="参赛引导进度">
-          <span data-guide-route="0" class="active">登录</span>
-          <span data-guide-route="1">账户</span>
-          <span data-guide-route="2">工作流</span>
-          <span data-guide-route="3">Agent</span>
-          <span data-guide-route="4">资格</span>
-          <span data-guide-route="5">提交</span>
-        </div>
-        <div id="guideTip" class="note">当前登录状态：已登录，可以继续下一步。</div>
-        <div class="guide-actions">
-          <button onclick="closeOnboarding()">稍后再说</button>
-          <div class="guide-actions-right">
-            <button id="guideBack" onclick="changeGuideStep(-1)" disabled>上一步</button>
-            <button id="guideVisit" onclick="visitGuidePage()">查看当前页面</button>
-            <button id="guideNext" class="primary" onclick="changeGuideStep(1)">下一步</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div id="checklistModal" class="modal-backdrop" role="dialog" aria-modal="true">
     <div class="modal">
       <div class="row">
@@ -1245,6 +1143,28 @@
       });
       window.scrollTo(0, 0);
     }
+    function showAccountTab(id) {
+      document.querySelectorAll('.subscription-panel').forEach(function(panel) {
+        panel.classList.add('hidden');
+      });
+      document.querySelectorAll('[id^="accountTab-"]').forEach(function(tab) {
+        var selected = tab.id === 'accountTab-' + id;
+        tab.classList.toggle('active', selected);
+        tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+      });
+      document.getElementById('accountPanel-' + id).classList.remove('hidden');
+    }
+    function showNotificationTab(id) {
+      document.querySelectorAll('.notification-panel').forEach(function(panel) {
+        panel.classList.add('hidden');
+      });
+      document.querySelectorAll('[id^="notificationTab-"]').forEach(function(tab) {
+        var selected = tab.id === 'notificationTab-' + id;
+        tab.classList.toggle('active', selected);
+        tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+      });
+      document.getElementById('notificationPanel-' + id).classList.remove('hidden');
+    }
     function openChecklist() {
       document.getElementById('checklistModal').classList.add('active');
     }
@@ -1272,96 +1192,9 @@
       badge.textContent = hasPlan ? plan : '';
       badge.classList.toggle('hidden', !hasPlan);
     }
-    var guideStep = 0;
-    var guideSteps = [
-      {
-        title: '欢迎来到 TQX',
-        text: '你已成功登录。接下来只需完成账户绑定、工作流和 Agent 设置，即可提交 GATC 参赛。',
-        tip: '当前登录状态：已登录，可以继续下一步。',
-        page: 'profile',
-        visit: '查看个人资料'
-      },
-      {
-        title: '绑定交易账户',
-        text: '进入账户管理，绑定一个可用的真实或仿真交易账户。参赛 Agent 必须关联可用账户。',
-        tip: '完成条件：至少有 1 个状态正常的交易账户。',
-        page: 'accounts',
-        visit: '去账户管理'
-      },
-      {
-        title: '建立并计算工作流',
-        text: '在工作流管理中选择官方范本或建立自己的策略，完成参数设置后运行一次计算。',
-        tip: '完成条件：工作流已保存，并成功完成计算。',
-        page: 'builder',
-        visit: '去工作流管理'
-      },
-      {
-        title: '创建你的 Agent',
-        text: '使用已计算的工作流创建 Agent，并检查其交易账户、策略指标和运行状态。',
-        tip: '完成条件：至少创建 1 个可提交参赛的 Agent。',
-        page: 'agents',
-        visit: '去Agent管理'
-      },
-      {
-        title: '检查参赛资格',
-        text: '确认账户有效、Agent 状态正常且参赛名额未满。每位用户最多可提交 3 个 Agent。',
-        tip: '检查完成后即可进入最后一步提交参赛。',
-        page: 'dashboard',
-        visit: '查看参赛概览'
-      },
-      {
-        title: '提交 Agent 参赛',
-        text: '打开参赛Checklist，选择要参加 GATC 的 Agent 并确认提交。提交后可在参赛概览查看排名和表现。',
-        tip: '准备完成：点击“打开参赛Checklist”完成首次参赛。',
-        page: 'checklist',
-        visit: '打开参赛Checklist'
-      }
-    ];
-    function renderGuideStep() {
-      var step = guideSteps[guideStep];
-      document.getElementById('guideStepLabel').textContent = '步骤 ' + (guideStep + 1) + ' / ' + guideSteps.length;
-      document.getElementById('guideStepTitle').textContent = step.title;
-      document.getElementById('guideStepText').textContent = step.text;
-      document.getElementById('guideTip').textContent = step.tip;
-      document.getElementById('guideProgress').style.width = ((guideStep + 1) / guideSteps.length * 100) + '%';
-      document.getElementById('guideBack').disabled = guideStep === 0;
-      document.getElementById('guideNext').textContent = guideStep === guideSteps.length - 1 ? '完成引导' : '下一步';
-      document.getElementById('guideVisit').textContent = step.visit;
-      document.querySelectorAll('[data-guide-route]').forEach(function(item, index) {
-        item.classList.toggle('active', index === guideStep);
-      });
-    }
-    function openOnboarding() {
-      guideStep = 0;
-      renderGuideStep();
-      document.getElementById('onboardingModal').classList.add('active');
-    }
-    function closeOnboarding() {
-      document.getElementById('onboardingModal').classList.remove('active');
-    }
-    function changeGuideStep(direction) {
-      if (guideStep === guideSteps.length - 1 && direction > 0) {
-        closeOnboarding();
-        openChecklist();
-        return;
-      }
-      guideStep = Math.max(0, Math.min(guideSteps.length - 1, guideStep + direction));
-      renderGuideStep();
-    }
-    function visitGuidePage() {
-      var page = guideSteps[guideStep].page;
-      closeOnboarding();
-      if (page === 'checklist') {
-        openChecklist();
-      } else {
-        showPage(page);
-      }
-    }
     setSubscriptionPlan('Pro');
     var initialPage = window.location.hash.slice(1);
     showPage(document.getElementById(initialPage) ? initialPage : 'profile');
-    var isNewUser = true;
-    if (isNewUser) openOnboarding();
   </script>
 </body>
 </html>
