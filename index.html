@@ -485,9 +485,21 @@
       border: 1px solid #999;
       background: #fafafa;
     }
+    .ranking-metrics {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .ranking-metrics .metric { margin-right: 0; }
+    .ranking-rank-group p {
+      margin: 6px 0 0;
+      color: #555;
+      font-size: 13px;
+    }
     .dashboard-links {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
     }
     .dashboard-links button {
@@ -495,10 +507,541 @@
       height: 44px;
       text-align: left;
     }
+    .dashboard-overview {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 16px;
+    }
+    .dashboard-overview h3,
+    .dashboard-overview p { margin: 0; }
+    .dashboard-overview-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .management-switch {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .management-switch button.active {
+      color: #fff;
+      background: #222;
+    }
+    .management-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .management-heading h2 { margin-bottom: 0; }
+    body.workflow-module-view .page { grid-template-columns: 1fr; }
+    body.workflow-module-view aside { display: none; }
+    body.competition-management-view main {
+      padding: 0;
+      background: #08090e;
+    }
+    body.trading-account-management-view main {
+      padding: 0;
+      background: #08090e;
+    }
+    .competition-management-page {
+      min-height: 100vh;
+      color: #f1f1f3;
+      background:
+        radial-gradient(circle at 70% 6%, rgba(35, 34, 50, .25), transparent 32%),
+        #08090e;
+    }
+    .competition-topbar {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 50px;
+      border-top: 2px solid #24262f;
+      border-bottom: 1px solid #262832;
+      border-radius: 32px 32px 0 0;
+      background: linear-gradient(100deg, #1b1c22, #101116 76%);
+    }
+    .competition-breadcrumb {
+      height: auto;
+      margin-bottom: 8px;
+      padding: 0;
+      border: 0;
+      color: #757780;
+      background: transparent;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+    .competition-title {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1;
+    }
+    .competition-rules {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      height: auto;
+      padding: 0;
+      border: 0;
+      color: #777983;
+      background: transparent;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .competition-rules span {
+      width: 25px;
+      height: 25px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #3e414a;
+      border-radius: 50%;
+      font-size: 14px;
+    }
+    .competition-top-actions {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+    .competition-back {
+      height: 38px;
+      padding: 0 16px;
+      border: 1px solid #3e414a;
+      border-radius: 20px;
+      color: #d6d7da;
+      background: #1b1d23;
+      font-weight: 700;
+    }
+    .competition-back:hover { border-color: #777a84; }
+    .competition-content { padding: 50px 60px 70px; }
+    .competition-hero {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 38px;
+    }
+    .competition-eyebrow {
+      margin: 0 0 18px;
+      color: #fff000;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .06em;
+    }
+    .competition-hero h2 {
+      margin: 0 0 16px;
+      font-size: clamp(38px, 4vw, 52px);
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+    .competition-hero-copy {
+      margin: 0;
+      color: #858791;
+      font-size: 17px;
+    }
+    .competition-submit {
+      min-width: 172px;
+      height: 62px;
+      border: 0;
+      border-radius: 34px;
+      color: #11120f;
+      background: #fff000;
+      font-size: 15px;
+      font-weight: 900;
+    }
+    .competition-submit:hover { background: #fff438; }
+    .competition-card {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 22px;
+      border: 1px solid #282b34;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 91% 16%, rgba(15, 15, 38, .92), transparent 27%),
+        linear-gradient(110deg, #0e1014, #08090d);
+    }
+    .competition-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 43px;
+      width: 118px;
+      height: 3px;
+      background: linear-gradient(90deg, #57e7f0, #965cff 52%, #fff000);
+    }
+    .competition-card-main {
+      display: grid;
+      grid-template-columns: 335px minmax(0, 1fr);
+      min-height: 355px;
+    }
+    .competition-card-info {
+      padding: 34px 38px;
+      border-right: 1px solid #24262d;
+    }
+    .competition-agent-head {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 37px;
+    }
+    .competition-agent-icon {
+      width: 62px;
+      height: 62px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 4px;
+      flex: 0 0 auto;
+      padding: 11px;
+      border: 1px solid #3b3e47;
+      border-radius: 20px;
+      background: #17191f;
+    }
+    .competition-agent-icon i { background: #61646b; }
+    .competition-agent-icon i:first-child,
+    .competition-agent-icon i:last-child { background: #fff000; }
+    .competition-agent-icon.local {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff000;
+      font-family: monospace;
+      font-size: 25px;
+      font-weight: 700;
+    }
+    .competition-agent-name-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .competition-agent-name {
+      font-size: 22px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .competition-kind,
+    .competition-live {
+      display: inline-flex;
+      align-items: center;
+      height: 31px;
+      padding: 0 13px;
+      border: 1px solid #343741;
+      border-radius: 17px;
+      color: #868891;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .competition-live {
+      gap: 9px;
+      color: #fff000;
+      border-color: #4b4807;
+      background: rgba(255, 240, 0, .04);
+    }
+    .competition-live::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      background: #fff000;
+      box-shadow: 0 0 9px rgba(255, 240, 0, .75);
+    }
+    .competition-agent-subtitle {
+      margin: 9px 0 0;
+      color: #70727c;
+      font-size: 14px;
+    }
+    .competition-account-data { display: grid; gap: 20px; }
+    .competition-account-data small {
+      display: block;
+      margin-bottom: 7px;
+      color: #62646d;
+      font-size: 12px;
+    }
+    .competition-account-data strong {
+      color: #e8e8eb;
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 19px;
+    }
+    .competition-account-data .return { color: #fff000; }
+    .competition-chart-wrap {
+      position: relative;
+      min-width: 0;
+      padding: 43px 38px 0 40px;
+    }
+    .competition-invite {
+      position: absolute;
+      top: 35px;
+      right: 39px;
+      z-index: 2;
+      min-width: 135px;
+      height: 59px;
+      border: 0;
+      border-radius: 31px;
+      font-weight: 800;
+      background: #f7f7f5;
+    }
+    .competition-invite span { margin-left: 17px; font-size: 22px; }
+    .competition-chart {
+      width: 100%;
+      height: 280px;
+      margin-top: 33px;
+    }
+    .competition-chart text {
+      fill: #555862;
+      font-family: Arial, "PingFang SC", sans-serif;
+      font-size: 11px;
+    }
+    .competition-card-footer {
+      min-height: 108px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px 38px;
+      border-top: 1px solid #24262d;
+    }
+    .competition-tags,
+    .competition-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .competition-tag,
+    .competition-actions button {
+      height: 46px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 18px;
+      border: 1px solid #292c34;
+      border-radius: 24px;
+      color: #9b9da5;
+      background: #0c0d11;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .competition-tag::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      margin-right: 9px;
+      border-radius: 50%;
+      background: #555861;
+    }
+    .competition-actions button { color: #bfc0c5; background: #1c1e23; }
+    .competition-actions .api-key { color: #15160f; border-color: #fff000; background: #fff000; }
+    .competition-actions .withdraw { color: #c85f5f; border-color: #652c2d; background: #1d1115; }
+    .competition-toast {
+      position: fixed;
+      right: 28px;
+      bottom: 28px;
+      z-index: 20;
+      padding: 14px 20px;
+      border: 1px solid #454810;
+      border-radius: 12px;
+      color: #fff000;
+      background: #18190d;
+      box-shadow: 0 12px 36px rgba(0,0,0,.45);
+    }
+    .trading-account-page {
+      min-height: 100vh;
+      color: #f1f1f3;
+      background:
+        radial-gradient(circle at 70% 7%, rgba(29, 30, 42, .28), transparent 34%),
+        #08090e;
+    }
+    .trading-account-content { padding: 48px 44px 70px; }
+    .trading-account-hero {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 38px;
+    }
+    .trading-account-hero h2 {
+      margin: 0 0 16px;
+      font-size: clamp(38px, 4vw, 52px);
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+    .trading-account-hero-copy {
+      margin: 0;
+      color: #858791;
+      font-size: 17px;
+    }
+    .trading-account-summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 25px;
+    }
+    .trading-account-summary-card {
+      min-height: 110px;
+      padding: 25px 22px;
+      border: 1px solid #30323a;
+      border-radius: 22px;
+      background: linear-gradient(110deg, #18191f, #111217);
+    }
+    .trading-account-summary-card small {
+      display: block;
+      margin-bottom: 12px;
+      color: #646670;
+      font-size: 12px;
+    }
+    .trading-account-summary-card strong {
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 28px;
+    }
+    .trading-account-summary-card strong.healthy { color: #fff000; }
+    .trading-account-list { display: grid; gap: 16px; }
+    .trading-account-row {
+      min-height: 154px;
+      display: grid;
+      grid-template-columns: minmax(300px, 2.2fr) .85fr 1.05fr 1.15fr auto;
+      align-items: center;
+      gap: 20px;
+      padding: 28px 30px;
+      border: 1px solid #292c33;
+      border-radius: 24px;
+      background: linear-gradient(110deg, #0d0f13, #090a0e);
+    }
+    .trading-account-identity {
+      display: flex;
+      align-items: center;
+      gap: 17px;
+      min-width: 0;
+    }
+    .broker-logo {
+      width: 66px;
+      height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      border: 1px solid #555913;
+      border-radius: 18px;
+      color: #fff000;
+      background: #151811;
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .broker-logo.zhang {
+      width: 154px;
+      border: 1px solid #d8d8d8;
+      border-radius: 17px;
+      color: #1e2127;
+      background: #f4f4f2;
+      font-size: 15px;
+    }
+    .broker-logo.robinhood {
+      color: #baff00;
+      border-color: #35662f;
+      font-size: 28px;
+    }
+    .trading-account-name {
+      margin-bottom: 8px;
+      color: #efeff1;
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .trading-account-subtitle { color: #656873; font-size: 12px; }
+    .trading-account-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-left: 9px;
+      padding: 5px 9px;
+      border: 1px solid #4d5207;
+      border-radius: 14px;
+      color: #dce500;
+      font-size: 10px;
+    }
+    .trading-account-status::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: #fff000;
+    }
+    .trading-account-status.offline { color: #c66b6b; border-color: #633739; }
+    .trading-account-status.offline::before { background: #c66b6b; }
+    .trading-account-field {
+      min-height: 58px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 19px;
+      border-left: 1px solid #292c33;
+    }
+    .trading-account-field small {
+      margin-bottom: 11px;
+      color: #5f626b;
+      font-size: 11px;
+    }
+    .trading-account-field strong { color: #c9cacf; font-size: 14px; }
+    .market-tags { display: flex; gap: 7px; flex-wrap: wrap; }
+    .market-tag {
+      padding: 7px 12px;
+      border: 1px solid #656900;
+      border-radius: 16px;
+      color: #fff000;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .disconnect-account {
+      height: 44px;
+      padding: 0 16px;
+      border: 1px solid #3a3c43;
+      border-radius: 22px;
+      color: #bfc0c5;
+      background: #1d1f23;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .broker-safety {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-top: 24px;
+      padding: 20px 25px;
+      border: 1px solid #33362e;
+      border-radius: 20px;
+      color: #696c74;
+      background: #111318;
+      font-size: 12px;
+    }
+    .broker-safety-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #4a4d4f;
+      color: #fff000;
+    }
+    .broker-safety strong { display: block; margin-bottom: 5px; color: #c7c8cc; }
     .panel-subsection {
       margin-top: 24px;
       padding-top: 20px;
       border-top: 1px solid #aaa;
+    }
+    .plan-benefits-row { align-items: flex-start; }
+    .plan-benefits-copy {
+      width: min(680px, 72%);
+      margin: 0;
+      padding-left: 20px;
+      columns: 2;
+      column-gap: 42px;
+    }
+    .plan-benefits-copy li {
+      margin-bottom: 9px;
+      break-inside: avoid;
+      line-height: 1.45;
     }
     .status {
       display: inline-block;
@@ -507,6 +1050,8 @@
       font-size: 12px;
       background: #f7f7f7;
     }
+    .status.refunded { color: #7a4d00; border-color: #c99b45; background: #fff8e8; }
+    .status.cancelled { color: #777; border-color: #aaa; background: #eee; }
     .tabs {
       display: flex;
       gap: 8px;
@@ -592,8 +1137,27 @@
       }
       .workflow-actions { justify-content: flex-start; flex-wrap: wrap; }
       .dashboard-links { grid-template-columns: 1fr; }
+      .dashboard-overview { align-items: flex-start; flex-direction: column; }
+      .management-heading { align-items: flex-start; flex-direction: column; }
       .profile-layout { grid-template-columns: 1fr; }
       .field { grid-template-columns: 1fr; }
+      .plan-benefits-row { align-items: flex-start; flex-direction: column; }
+      .plan-benefits-copy { width: 100%; columns: 1; }
+      .competition-topbar { height: 86px; padding: 0 22px; border-radius: 0; }
+      .competition-top-actions { gap: 10px; }
+      .competition-content { padding: 34px 20px 50px; }
+      .competition-hero { align-items: flex-start; flex-direction: column; }
+      .competition-submit { height: 52px; }
+      .competition-card-main { grid-template-columns: 1fr; }
+      .competition-card-info { border-right: 0; border-bottom: 1px solid #24262d; }
+      .competition-account-data { grid-template-columns: repeat(3, 1fr); }
+      .competition-card-footer { align-items: flex-start; flex-direction: column; }
+      .competition-actions { width: 100%; }
+      .trading-account-content { padding: 34px 20px 50px; }
+      .trading-account-hero { align-items: flex-start; flex-direction: column; }
+      .trading-account-row { grid-template-columns: 1fr 1fr; }
+      .trading-account-identity { grid-column: 1 / -1; }
+      .trading-account-row .disconnect-account { justify-self: start; }
     }
     @media (max-width: 480px) {
       header { padding: 0 12px; }
@@ -616,6 +1180,26 @@
       }
       .language-switcher .language-long { display: none; }
       .language-switcher .language-short { display: inline; }
+      .competition-rules { font-size: 0; gap: 0; }
+      .competition-back { padding: 0 12px; font-size: 12px; }
+      .competition-content { padding-inline: 12px; }
+      .competition-card { border-radius: 20px; }
+      .competition-card-info,
+      .competition-chart-wrap,
+      .competition-card-footer { padding-left: 20px; padding-right: 20px; }
+      .competition-agent-head { align-items: flex-start; }
+      .competition-agent-name-line { gap: 7px; }
+      .competition-agent-name { width: 100%; }
+      .competition-account-data { grid-template-columns: 1fr; }
+      .competition-invite { top: 22px; right: 20px; min-width: 116px; height: 48px; }
+      .competition-chart { height: 230px; margin-top: 48px; }
+      .competition-actions button { flex: 1 1 auto; justify-content: center; }
+      .trading-account-content { padding-inline: 12px; }
+      .trading-account-summary { grid-template-columns: 1fr; }
+      .trading-account-row { grid-template-columns: 1fr; padding: 22px 18px; }
+      .trading-account-identity { grid-column: auto; align-items: flex-start; }
+      .broker-logo.zhang { width: 102px; }
+      .trading-account-field { padding: 12px 0 0; border-left: 0; border-top: 1px solid #292c33; }
     }
   </style>
 </head>
@@ -632,7 +1216,7 @@
       <div class="user-menu" onclick="showPage('profile')" role="button" tabindex="0" aria-label="打开个人资料">
         <span class="user-avatar">YZ</span>
         <span class="user-name">Yazide</span>
-        <span id="planBadge" class="plan-badge" title="当前订阅计划">Pro</span>
+        <span id="planBadge" class="plan-badge" title="当前订阅计划">Basic</span>
       </div>
     </div>
   </header>
@@ -640,11 +1224,6 @@
   <div class="page">
     <aside>
       <div class="nav">
-        <div class="nav-title">个人中心</div>
-        <button data-page="profile" onclick="showPage('profile')">个人资料</button>
-        <button data-page="subscription-compute" onclick="showPage('subscription-compute')">订阅与算力</button>
-        <button data-page="notifications" onclick="showPage('notifications')">系统通知</button>
-
         <div class="nav-title">我的参赛</div>
         <div class="subnav">
           <button data-page="dashboard" onclick="showPage('dashboard')">仪表盘</button>
@@ -652,11 +1231,18 @@
           <button data-page="awards" onclick="showPage('awards')">获奖记录</button>
           <button onclick="openChecklist()">参赛准备清单</button>
         </div>
+
+        <div class="nav-title">个人中心</div>
+        <div class="subnav">
+          <button data-page="profile" onclick="showPage('profile')">个人资料</button>
+          <button data-page="subscription-compute" onclick="showPage('subscription-compute')">订阅与算力</button>
+          <button data-page="notifications" onclick="showPage('notifications')">系统通知</button>
+        </div>
       </div>
     </aside>
 
     <main>
-      <section id="profile" class="wire-page">
+      <section id="profile" class="wire-page hidden">
         <div class="section">
           <h2>个人资料</h2>
           <p>管理个人身份信息、账户安全与交易经验。</p>
@@ -700,7 +1286,6 @@
         </div>
         <div class="section">
           <h3>偏好设定</h3>
-          <p>偏好作为个人资料的一部分统一管理。</p>
           <div class="field">
             <strong>显示语言</strong>
             <select id="displayLanguageSelect" aria-label="显示语言" onchange="setLanguage(this.value)"><option value="zh">繁体中文</option><option value="en">English</option></select>
@@ -718,18 +1303,31 @@
 
         <div id="accountPanel-subscription" class="subscription-panel section" role="tabpanel">
           <h3>订阅详情</h3>
-          <div class="row"><span>当前方案</span><strong>TQX Pro</strong></div>
+          <div class="row"><span>当前方案</span><strong>TQX Basic</strong></div>
           <div class="row"><span>订阅状态</span><span class="status">生效中</span></div>
           <div class="row"><span>计费周期</span><span>每月</span></div>
           <div class="row"><span>下次续订日期</span><span>2026-08-10</span></div>
-          <div class="row"><span>方案权益</span><span>高级工作流、更多 Agent 配额、优先算力</span></div>
-          <p><button>管理订阅</button> <button>变更方案</button></p>
+          <div class="row plan-benefits-row">
+            <span>方案权益</span>
+            <ul class="plan-benefits-copy">
+              <li>每月包含 4,500 算力</li>
+              <li>工作流策略数量无限</li>
+              <li>高级伺服器速度</li>
+              <li>10 个仿真账户，每个账户包含 1,000 万虚拟资金</li>
+              <li>实盘账户数量无限</li>
+              <li>7×24 小时顾问支持</li>
+              <li>高级会员专属社群</li>
+              <li>日频数据回测最长 10 年</li>
+              <li>分钟数据回测最长 1 年</li>
+            </ul>
+          </div>
+          <p><button>升级</button></p>
 
           <div class="panel-subsection">
             <h3>算力概览</h3>
             <div class="row"><span>可用算力</span><strong>8,420 CU</strong></div>
             <div class="row"><span>本月已使用</span><strong>1,580 CU</strong></div>
-            <p><button>立即储值</button> <button>查看用量报告</button></p>
+            <p><button>立即储值</button></p>
           </div>
 
           <div class="panel-subsection">
@@ -743,9 +1341,9 @@
         <div id="accountPanel-billing" class="subscription-panel section hidden" role="tabpanel">
           <h3>账单记录</h3>
           <p>订阅付款和算力储值账单统一展示，可按类型筛选。</p>
-          <div class="row"><strong>2026-07-10 · TQX Pro 月费</strong><span>HK$ 299 · <span class="status">已付款</span> <button>下载账单</button></span></div>
-          <div class="row"><strong>2026-06-18 · 算力储值</strong><span>HK$ 500 · <span class="status">已付款</span> <button>下载账单</button></span></div>
-          <div class="row"><strong>2026-06-10 · TQX Pro 月费</strong><span>HK$ 299 · <span class="status">已付款</span> <button>下载账单</button></span></div>
+          <div class="row"><strong>2026-07-10 · TQX Basic 月费</strong><span>HK$ 299 · <span class="status">已付款</span> <button>下载账单</button></span></div>
+          <div class="row"><strong>2026-06-18 · 算力储值</strong><span>HK$ 500 · <span class="status refunded">已退款</span> <button>下载账单</button></span></div>
+          <div class="row"><strong>2026-06-10 · TQX Basic 月费</strong><span>HK$ 299 · <span class="status cancelled">已取消</span> <button>下载账单</button></span></div>
         </div>
 
       </section>
@@ -759,7 +1357,7 @@
         <div id="notificationPanel-platform" class="notification-panel section" role="tabpanel">
           <h3>平台通知</h3>
           <div class="row"><span><strong>算力余额提醒</strong><br>可用算力低于设定的提醒阈值。</span><span>2026-07-12</span></div>
-          <div class="row"><span><strong>订阅续订成功</strong><br>TQX Pro 已成功续订。</span><span>2026-07-10</span></div>
+          <div class="row"><span><strong>订阅续订成功</strong><br>TQX Basic 已成功续订。</span><span>2026-07-10</span></div>
           <p><button>平台通知全部标记为已读</button></p>
         </div>
         <div id="notificationPanel-competition" class="notification-panel section hidden" role="tabpanel">
@@ -771,46 +1369,268 @@
         </div>
       </section>
 
-      <section id="dashboard" class="wire-page hidden">
+      <section id="dashboard" class="wire-page">
         <div class="section">
           <h2>我的参赛 / 仪表盘</h2>
-          <p>集中查看 GATC 参赛状态、实时排名、Performance 和净值曲线。</p>
+          <p>查看 GATC 实时排名、积分和净值曲线。</p>
         </div>
 
-        <div class="grid">
-          <div class="section">
-            <h3>Welcome Back</h3>
-            <p>用户名称：Yazide</p>
-            <p>登录状态：已登录</p>
-            <button onclick="openChecklist()">查看参赛准备清单</button>
-          </div>
-          <div class="section">
-            <h3>GATC HK 2026</h3>
-            <div class="placeholder">赛事标识 / 赛事入口区域</div>
+        <div class="section dashboard-overview">
+          <div class="dashboard-overview-meta">
+            <h3>GATC 2026 · S1</h3>
           </div>
         </div>
 
         <div class="section">
           <h3>快捷入口</h3>
           <div class="dashboard-links">
-            <button onclick="showPage('account-agent')">账户与 Agent 管理</button>
-            <button onclick="showPage('builder')">工作流管理</button>
+            <button id="dashboardAccountManagement" onclick="openTradingAccountManagement()">账户管理</button>
+            <button id="dashboardAgentManagement" onclick="openCompetitionManagement()">Agent 管理</button>
+            <button onclick="openWorkflowModule()">TQX OS</button>
           </div>
         </div>
 
         <div class="section">
           <h3>参赛 Agent 数据区</h3>
           <div>
-            <span class="metric">Rank：496</span>
-            <span class="metric">Performance：23.4%</span>
-            <span class="metric">参赛 Agent：2 / 3</span>
+            <span class="metric">排名：496</span>
+            <span class="metric">积分：856</span>
+            <span class="metric">当前净值：1.12</span>
           </div>
           <div class="chart">
             <strong>Agent X01</strong>
             <div class="chart-line" data-label="净值曲线数据区域"></div>
           </div>
-          <p class="note">空状态：若用户尚未提交参赛，显示“你还没有参赛 Agent”，并提供“打开参赛准备清单”按钮。</p>
+          <p class="note">空状态：若用户尚未提交参赛，则提供“Agent 管理”入口。</p>
         </div>
+      </section>
+
+      <section id="trading-account-management" class="wire-page trading-account-page hidden" aria-labelledby="tradingAccountManagementTitle">
+        <div class="competition-topbar">
+          <div>
+            <div class="competition-breadcrumb">TQX&nbsp;&nbsp;/&nbsp;&nbsp;账户中心</div>
+            <h1 id="tradingAccountManagementTitle" class="competition-title">账户管理</h1>
+          </div>
+          <div class="competition-top-actions">
+            <button class="competition-back" onclick="showPage('dashboard')">← 返回仪表盘</button>
+            <button class="competition-rules" onclick="showTradingAccountToast('连接说明：账户凭证将由券商官方流程安全授权')">连接说明 <span>?</span></button>
+          </div>
+        </div>
+
+        <div class="trading-account-content">
+          <div class="trading-account-hero">
+            <div>
+              <p class="competition-eyebrow">已连接券商</p>
+              <h2>交易账户</h2>
+              <p class="trading-account-hero-copy">连接并管理 TQX Agent 所使用的券商账户。</p>
+            </div>
+            <button class="competition-submit" onclick="openAccountCreate('live')">＋&nbsp; 新增账户</button>
+          </div>
+
+          <div class="trading-account-summary" aria-label="账户连接概览">
+            <div class="trading-account-summary-card"><small>已连接</small><strong id="connectedAccountCount">3</strong></div>
+            <div class="trading-account-summary-card"><small>状态正常</small><strong id="healthyAccountCount" class="healthy">3</strong></div>
+          </div>
+
+          <div class="trading-account-list">
+            <article class="trading-account-row" data-connected="true">
+              <div class="trading-account-identity">
+                <div class="broker-logo zhang">张乐全球通</div>
+                <div>
+                  <div class="trading-account-name">涨乐全球通 <span class="trading-account-status">已连接</span></div>
+                  <div class="trading-account-subtitle">证券账户 ··· 889</div>
+                </div>
+              </div>
+              <div class="trading-account-field"><small>账户类型</small><strong>实盘</strong></div>
+              <div class="trading-account-field"><small>市场范围</small><div class="market-tags"><span class="market-tag">美股</span><span class="market-tag">港股</span></div></div>
+              <div class="trading-account-field"><small>连接日期</small><strong>2026年6月18日</strong></div>
+              <span></span>
+            </article>
+
+            <article class="trading-account-row" data-connected="false">
+              <div class="trading-account-identity">
+                <div class="broker-logo">模拟</div>
+                <div>
+                  <div class="trading-account-name">TQX 模拟 <span class="trading-account-status offline">未连接</span></div>
+                  <div class="trading-account-subtitle">模拟账户 ··· 363</div>
+                </div>
+              </div>
+              <div class="trading-account-field"><small>账户类型</small><strong>模拟</strong></div>
+              <div class="trading-account-field"><small>市场范围</small><div class="market-tags"><span class="market-tag">美股</span><span class="market-tag">港股</span></div></div>
+              <div class="trading-account-field"><small>连接日期</small><strong>2026年5月3日</strong></div>
+              <button class="disconnect-account" onclick="removeTradingAccount(this)">删除账户</button>
+            </article>
+
+            <article class="trading-account-row" data-connected="true">
+              <div class="trading-account-identity">
+                <div class="broker-logo">模拟</div>
+                <div>
+                  <div class="trading-account-name">11111 <span class="trading-account-status">可用</span></div>
+                  <div class="trading-account-subtitle">TQX 模拟账户 ··· 0699</div>
+                </div>
+              </div>
+              <div class="trading-account-field"><small>账户类型</small><strong>模拟</strong></div>
+              <div class="trading-account-field"><small>市场范围</small><div class="market-tags"><span class="market-tag">美股</span><span class="market-tag">港股</span></div></div>
+              <div class="trading-account-field"><small>建立日期</small><strong>2026年7月20日</strong></div>
+              <button class="disconnect-account" onclick="removeTradingAccount(this)">删除账户</button>
+            </article>
+
+            <article class="trading-account-row" data-connected="true">
+              <div class="trading-account-identity">
+                <div class="broker-logo robinhood">↗</div>
+                <div>
+                  <div class="trading-account-name">Robinhood <span class="trading-account-status">已连接</span></div>
+                  <div class="trading-account-subtitle">个人账户 ··· 4821</div>
+                </div>
+              </div>
+              <div class="trading-account-field"><small>账户类型</small><strong>实盘</strong></div>
+              <div class="trading-account-field"><small>市场范围</small><div class="market-tags"><span class="market-tag">美股</span></div></div>
+              <div class="trading-account-field"><small>连接日期</small><strong>2026年7月17日</strong></div>
+              <span></span>
+            </article>
+          </div>
+
+          <div class="broker-safety">
+            <div class="broker-safety-icon">⌁</div>
+            <div><strong>券商级安全连接</strong>TQX 使用各券商的官方授权流程。您的券商密码不会分享给 TQX，TQX 亦不会储存。</div>
+          </div>
+        </div>
+        <div id="tradingAccountToast" class="competition-toast hidden" role="status" aria-live="polite"></div>
+      </section>
+
+      <section id="competition-management" class="wire-page competition-management-page hidden" aria-labelledby="competitionManagementTitle">
+        <div class="competition-topbar">
+          <div>
+            <button class="competition-breadcrumb" onclick="showPage('dashboard')" aria-label="返回控制中心仪表盘">GATC&nbsp;&nbsp;/&nbsp;&nbsp;控制中心</button>
+            <h1 id="competitionManagementTitle" class="competition-title">参赛管理</h1>
+          </div>
+          <div class="competition-top-actions">
+            <button class="competition-back" onclick="showPage('dashboard')">← 返回仪表盘</button>
+            <button class="competition-rules" onclick="showCompetitionToast('比赛规则将在新版本中开放')">比赛规则 <span>?</span></button>
+          </div>
+        </div>
+
+        <div class="competition-content">
+          <div class="competition-hero">
+            <div>
+              <p class="competition-eyebrow">我的参赛项目</p>
+              <h2>参赛实例</h2>
+              <p class="competition-hero-copy">管理参赛 Agent、本地执行器与即时比赛状态。</p>
+            </div>
+            <button class="competition-submit" onclick="openAgentRegistration()">＋&nbsp; 提交参赛项目</button>
+          </div>
+
+          <article class="competition-card" data-competition-card="001">
+            <div class="competition-card-main">
+              <div class="competition-card-info">
+                <div class="competition-agent-head">
+                  <div class="competition-agent-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+                  <div>
+                    <div class="competition-agent-name-line">
+                      <span class="competition-agent-name">参赛001</span>
+                      <span class="competition-kind">Agent</span>
+                      <span class="competition-live">执行中</span>
+                    </div>
+                    <p class="competition-agent-subtitle">Momentum Matrix · v1.4</p>
+                  </div>
+                </div>
+                <div class="competition-account-data">
+                  <div><small>交易账户</small><strong>77 · TQX实盘</strong></div>
+                  <div><small>账户权益</small><strong>10,470,710</strong></div>
+                  <div><small>最高收益</small><strong class="return">+7.84%</strong></div>
+                </div>
+              </div>
+              <div class="competition-chart-wrap">
+                <button class="competition-invite" onclick="showCompetitionToast('分享邀请链接已复制')">分享邀请 <span>»»</span></button>
+                <svg class="competition-chart" viewBox="0 0 1200 260" preserveAspectRatio="none" role="img" aria-label="参赛001 收益曲线，整体上升至百分之七点八四">
+                  <defs>
+                    <linearGradient id="competitionAreaOne" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#a5b534" stop-opacity=".38"/>
+                      <stop offset="1" stop-color="#a5b534" stop-opacity=".02"/>
+                    </linearGradient>
+                  </defs>
+                  <g stroke="#1b1e24" stroke-width="1">
+                    <line x1="0" y1="68" x2="1200" y2="68"/><line x1="0" y1="126" x2="1200" y2="126"/>
+                    <line x1="0" y1="184" x2="1200" y2="184"/><line x1="0" y1="238" x2="1200" y2="238"/>
+                  </g>
+                  <path d="M0 178 L60 174 L120 178 L180 154 L240 164 L300 128 L360 137 L420 111 L480 117 L540 88 L600 104 L660 73 L720 84 L780 67 L840 76 L900 50 L960 59 L1020 39 L1080 49 L1140 27 L1200 35 L1200 238 L0 238 Z" fill="url(#competitionAreaOne)"/>
+                  <polyline points="0,178 60,174 120,178 180,154 240,164 300,128 360,137 420,111 480,117 540,88 600,104 660,73 720,84 780,67 840,76 900,50 960,59 1020,39 1080,49 1140,27 1200,35" fill="none" stroke="#fff000" stroke-width="3" vector-effect="non-scaling-stroke"/>
+                  <g text-anchor="middle"><text x="120" y="255">6月30日</text><text x="360" y="255">7月4日</text><text x="600" y="255">7月8日</text><text x="840" y="255">7月12日</text><text x="1080" y="255">7月16日</text></g>
+                </svg>
+              </div>
+            </div>
+            <div class="competition-card-footer">
+              <div class="competition-tags">
+                <span class="competition-tag">分组&nbsp; ALPHA</span>
+                <span class="competition-tag">目前排名&nbsp; #12</span>
+                <span class="competition-tag">总积分&nbsp; 856</span>
+              </div>
+              <div class="competition-actions">
+                <button onclick="showCompetitionToast('正在打开参赛001详细资料')">详细资料</button>
+                <button onclick="showCompetitionToast('执行日志已更新')">执行日志</button>
+                <button onclick="showCompetitionToast('已建立重新提交草稿')">重新提交</button>
+                <button onclick="toggleCompetitionRun(this)">暂停实例</button>
+                <button class="withdraw" onclick="withdrawCompetition(this)">退出比赛</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="competition-card" data-competition-card="local">
+            <div class="competition-card-main">
+              <div class="competition-card-info">
+                <div class="competition-agent-head">
+                  <div class="competition-agent-icon local" aria-hidden="true">&gt;_</div>
+                  <div>
+                    <div class="competition-agent-name-line">
+                      <span class="competition-agent-name">量化执行器</span>
+                      <span class="competition-kind">本地</span>
+                      <span class="competition-live">执行中</span>
+                    </div>
+                    <p class="competition-agent-subtitle">本机交易执行器 · 装置–A91F</p>
+                  </div>
+                </div>
+                <div class="competition-account-data">
+                  <div><small>交易账户</small><strong>772 · TQX实盘</strong></div>
+                  <div><small>账户权益</small><strong>5,230,100</strong></div>
+                  <div><small>最高收益</small><strong class="return">+4.62%</strong></div>
+                </div>
+              </div>
+              <div class="competition-chart-wrap">
+                <button class="competition-invite" onclick="showCompetitionToast('分享邀请链接已复制')">分享邀请 <span>»»</span></button>
+                <svg class="competition-chart" viewBox="0 0 1200 260" preserveAspectRatio="none" role="img" aria-label="量化执行器收益曲线，整体上升至百分之四点六二">
+                  <defs>
+                    <linearGradient id="competitionAreaTwo" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#a5b534" stop-opacity=".38"/>
+                      <stop offset="1" stop-color="#a5b534" stop-opacity=".02"/>
+                    </linearGradient>
+                  </defs>
+                  <g stroke="#1b1e24" stroke-width="1">
+                    <line x1="0" y1="68" x2="1200" y2="68"/><line x1="0" y1="126" x2="1200" y2="126"/>
+                    <line x1="0" y1="184" x2="1200" y2="184"/><line x1="0" y1="238" x2="1200" y2="238"/>
+                  </g>
+                  <path d="M0 181 L60 171 L120 179 L180 151 L240 159 L300 133 L360 143 L420 113 L480 125 L540 96 L600 107 L660 81 L720 92 L780 67 L840 75 L900 48 L960 61 L1020 38 L1080 50 L1140 28 L1200 18 L1200 238 L0 238 Z" fill="url(#competitionAreaTwo)"/>
+                  <polyline points="0,181 60,171 120,179 180,151 240,159 300,133 360,143 420,113 480,125 540,96 600,107 660,81 720,92 780,67 840,75 900,48 960,61 1020,38 1080,50 1140,28 1200,18" fill="none" stroke="#fff000" stroke-width="3" vector-effect="non-scaling-stroke"/>
+                  <g text-anchor="middle"><text x="120" y="255">6月30日</text><text x="360" y="255">7月4日</text><text x="600" y="255">7月8日</text><text x="840" y="255">7月12日</text><text x="1080" y="255">7月16日</text></g>
+                </svg>
+              </div>
+            </div>
+            <div class="competition-card-footer">
+              <div class="competition-tags">
+                <span class="competition-tag">分组&nbsp; BETA</span>
+                <span class="competition-tag">目前排名&nbsp; #28</span>
+                <span class="competition-tag">总积分&nbsp; 624</span>
+              </div>
+              <div class="competition-actions">
+                <button onclick="showCompetitionToast('正在打开量化执行器详细资料')">详细资料</button>
+                <button onclick="showCompetitionToast('执行日志已更新')">执行日志</button>
+                <button class="api-key" onclick="copyCompetitionApiKey()">复制 API 密钥</button>
+                <button onclick="toggleCompetitionRun(this)">暂停实例</button>
+                <button class="withdraw" onclick="withdrawCompetition(this)">退出比赛</button>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div id="competitionToast" class="competition-toast hidden" role="status" aria-live="polite"></div>
       </section>
 
       <section id="ranking" class="wire-page hidden">
@@ -821,14 +1641,18 @@
         <div class="grid">
           <div class="section">
             <h3>当前赛季</h3>
-            <p>GATC HK 2026 · 2026-07-01 至 2026-12-31</p>
+            <p>GATC 2026 · S1 · 2026-07-01 至 2026-12-31</p>
             <span class="status">进行中</span>
           </div>
           <div class="section">
-            <h3>我的累积积分</h3>
-            <span class="metric">12,680 分</span>
-            <span class="metric">当前排名：28</span>
-            <p>较上周上升 6 名</p>
+            <h3>积分与排名</h3>
+            <div class="ranking-metrics">
+              <span class="metric">12,680 分</span>
+              <div class="ranking-rank-group">
+                <span class="metric">当前排名：28</span>
+                <p>较上周提升 6 名</p>
+              </div>
+            </div>
           </div>
         </div>
         <div class="section">
@@ -851,21 +1675,21 @@
       <section id="awards" class="wire-page hidden">
         <div class="section">
           <h2>我的参赛 / 获奖记录</h2>
-          <p>查看本赛季每个季度获得的奖励及领取状态。</p>
+          <p>查看本赛季每个季度的奖励计算结果。</p>
         </div>
         <div class="section">
-          <h3>GATC HK 2026 · 本赛季季度奖励</h3>
+          <h3>GATC 2026 · 本赛季季度奖励</h3>
           <div class="row">
             <div><strong>第一季度 · 卓越表现奖</strong><p>季度积分排名第 12 名</p></div>
-            <div><span class="status">已领取</span> <button>查看奖励详情</button></div>
+            <button>查看</button>
           </div>
           <div class="row">
             <div><strong>第二季度 · Top 30 奖励</strong><p>季度积分排名第 28 名</p></div>
-            <div><span class="status">待领取</span> <button>领取奖励</button></div>
+            <button>查看</button>
           </div>
           <div class="row">
-            <div><strong>第三季度</strong><p>季度进行中，奖励将在季度结束后结算。</p></div>
-            <span class="status">结算中</span>
+            <div><strong>第三季度</strong><p>季度进行中，奖励计算中。</p></div>
+            <span class="status">计算中</span>
           </div>
           <div class="row">
             <div><strong>第四季度</strong><p>尚未开始。</p></div>
@@ -874,25 +1698,31 @@
         </div>
         <div class="section">
           <h3>本赛季奖励统计</h3>
-          <span class="metric">已获奖励：2</span>
-          <span class="metric">待领取：1</span>
-          <span class="metric">奖金 / 权益：HK$ 3,000</span>
+          <span class="metric">奖金：HK$ 3,000</span>
         </div>
       </section>
 
-      <section id="account-agent" class="wire-page hidden">
+      <section id="account-agent-management" class="wire-page hidden">
         <div class="section">
-          <h2>账户与 Agent 管理</h2>
-          <p>按顺序完成：添加交易账户 → 前往工作流创建 Agent → 返回本页提交 Agent 报名。</p>
+          <div class="management-heading">
+            <h2>账户与 Agent 管理</h2>
+            <button onclick="showPage('dashboard')">← 返回仪表盘</button>
+          </div>
+          <p>在当前页面切换账户与 Agent 管理。</p>
+          <div class="management-switch" role="tablist" aria-label="账户与 Agent 管理切换">
+            <button id="managementTab-account" class="active" role="tab" aria-selected="true" onclick="showManagementTab('account')">账户管理</button>
+            <button id="managementTab-agent" role="tab" aria-selected="false" onclick="showManagementTab('agent')">Agent 管理</button>
+          </div>
         </div>
 
-        <div class="section">
-          <h2>1. 账户管理</h2>
-          <p>必须先添加至少一个可用的实盘或仿真盘账户，报名时 Agent 需要绑定该账户。</p>
-          <button onclick="openAccountCreate('live')">+ 添加实盘账户</button>
-          <button onclick="openAccountCreate('simulation')">+ 添加仿真盘账户</button>
-        </div>
-        <div class="account-panel">
+        <div id="managementPanel-account" class="management-panel" role="tabpanel">
+          <div class="section">
+            <h3>账户列表</h3>
+            <p>必须先添加至少一个可用账户，报名时 Agent 需要绑定该账户。</p>
+            <button onclick="openAccountCreate('live')">+ 添加实盘账户</button>
+            <button onclick="openAccountCreate('simulation')">+ 添加仿真盘账户</button>
+          </div>
+          <div class="account-panel">
           <div class="account-columns">
             <strong>账户名称</strong><strong>所属机构</strong><strong>交易账户</strong><strong>绑定时间</strong><strong>参赛组别</strong><strong>参赛状态</strong>
           </div>
@@ -932,15 +1762,17 @@
             <div data-label="参赛状态"><span class="status">已退赛</span></div>
             <span class="account-delete" title="删除账户">🗑</span>
           </article>
+          </div>
         </div>
 
-        <div id="agentManagementSection" class="section">
-          <h2>2. Agent 管理与报名</h2>
-          <p>账户添加完成后，先在工作流管理中创建 Agent；创建完成后返回这里提交报名。</p>
-          <button onclick="showPage('builder')">去工作流创建 Agent</button>
-          <button onclick="openAgentRegistration()">提交 Agent 报名</button>
-        </div>
-        <div class="agent-grid">
+        <div id="managementPanel-agent" class="management-panel hidden" role="tabpanel">
+          <div id="agentManagementSection" class="section">
+            <h3>Agent 管理与报名</h3>
+            <p>账户添加完成后，先在 TQX OS 中创建 Agent；创建完成后返回这里提交报名。</p>
+            <button onclick="openWorkflowModule()">去工作流创建 Agent</button>
+            <button onclick="openAgentRegistration()">提交 Agent 报名</button>
+          </div>
+          <div class="agent-grid">
           <article class="agent-card">
             <div class="agent-card-head">
               <div class="agent-identity">
@@ -1030,14 +1862,15 @@
               <button>查看详情</button><button>运行日志</button><button class="primary" onclick="openAgentRegistration()">提交报名</button><button class="danger">删除</button>
             </div>
           </article>
+          </div>
         </div>
       </section>
 
       <section id="builder" class="wire-page hidden">
         <div class="section">
-          <h2>工作流管理</h2>
+          <h2>TQX OS</h2>
           <p>建立和管理交易工作流，完成检视与计算后可用于创建 Agent。</p>
-          <button onclick="returnToAgentManagement()">← 返回账户与 Agent 管理</button>
+          <button onclick="returnFromWorkflow()">← 返回 Agent 管理</button>
         </div>
         <div class="workflow-toolbar">
           <div class="workflow-tabs">
@@ -1108,15 +1941,15 @@
             <strong>绑定账户</strong>
             <p>已有可用账户后，才可以创建和提交参赛 Agent。</p>
           </div>
-          <button onclick="closeChecklist(); showPage('account-agent')">去添加账户</button>
+          <button onclick="closeChecklist(); openManagement('account')">去添加账户</button>
         </div>
         <div class="step">
           <div class="num">3</div>
           <div>
             <strong>创建 Agent</strong>
-            <p>通过工作流管理建立并计算工作流，这是 Agent 创建的必经流程。</p>
+            <p>通过 TQX OS 建立并计算工作流，这是 Agent 创建的必经流程。</p>
           </div>
-          <button onclick="closeChecklist(); showPage('builder')">创建 Agent</button>
+          <button onclick="closeChecklist(); openWorkflowModule()">创建 Agent</button>
         </div>
         <div class="step">
           <div class="num">4</div>
@@ -1152,12 +1985,12 @@
         <h2 id="agentRegistrationTitle">提交 Agent 报名</h2>
         <button onclick="closeAgentRegistration()">关闭</button>
       </div>
-      <p class="note">提交前请确认：已添加可用的实盘或仿真盘账户，并已在工作流管理中创建 Agent。每位用户最多报名 3 个 Agent。</p>
+      <p class="note">提交前请确认：已添加可用的实盘或仿真盘账户，并已在 TQX OS 中创建 Agent。每位用户最多报名 3 个 Agent。</p>
       <div class="section">
         <div class="field"><strong>Agent 名称</strong><input value="Agent X03" aria-label="Agent 名称"><span></span></div>
         <div class="field"><strong>Agent 头像</strong><input type="file" accept="image/*" aria-label="Agent 头像"><span></span></div>
         <div class="field"><strong>绑定账户</strong><select><option>TQX仿真 01 · 账户 464</option><option>TQX仿真 03 · 账户 344</option></select><span></span></div>
-        <div class="field"><strong>已创建 Agent</strong><select><option>Agent X03 · GATC 趋势策略 3434</option><option>Agent X01 · 参赛01-克隆</option></select><button onclick="closeAgentRegistration(); showPage('builder')">去工作流创建</button></div>
+        <div class="field"><strong>已创建 Agent</strong><select><option>Agent X03 · GATC 趋势策略 3434</option><option>Agent X01 · 参赛01-克隆</option></select><button onclick="closeAgentRegistration(); openWorkflowModule()">去工作流创建</button></div>
         <p><button onclick="submitAgentRegistration()">确认提交报名</button> <button onclick="closeAgentRegistration()">取消</button></p>
         <p id="agentRegistrationSuccess" class="note hidden"><strong>报名成功：</strong>Agent X03 已加入 GATC，可前往仪表盘查看实时数据。</p>
       </div>
@@ -1199,7 +2032,6 @@
       '中级 · 最近更新：2026-07-10': 'Intermediate · Last updated: 2026-07-10',
       '重新评估': 'Retake Assessment',
       '偏好设定': 'Preferences',
-      '偏好作为个人资料的一部分统一管理。': 'Manage preferences as part of your profile.',
       '显示语言': 'Display Language',
       '繁体中文': 'Traditional Chinese',
       '保存偏好': 'Save Preferences',
@@ -1214,23 +2046,31 @@
       '每月': 'Monthly',
       '下次续订日期': 'Next Renewal Date',
       '方案权益': 'Plan Benefits',
-      '高级工作流、更多 Agent 配额、优先算力': 'Advanced workflows, higher Agent limits, and priority compute',
-      '管理订阅': 'Manage Subscription',
-      '变更方案': 'Change Plan',
+      '每月包含 4,500 算力': '4,500 compute units per month',
+      '工作流策略数量无限': 'Unlimited workflow strategies',
+      '高级伺服器速度': 'Advanced server speed',
+      '10 个仿真账户，每个账户包含 1,000 万虚拟资金': '10 simulation accounts with 10 million in virtual funds each',
+      '实盘账户数量无限': 'Unlimited live accounts',
+      '7×24 小时顾问支持': '24/7 advisor support',
+      '高级会员专属社群': 'Advanced members-only community',
+      '日频数据回测最长 10 年': 'Up to 10 years of daily backtest data',
+      '分钟数据回测最长 1 年': 'Up to 1 year of minute-level backtest data',
+      '升级': 'Upgrade',
       '算力概览': 'Compute Overview',
       '可用算力': 'Available Compute',
       '本月已使用': 'Used This Month',
       '立即储值': 'Top Up Now',
-      '查看用量报告': 'View Usage Report',
       '算力记录': 'Compute History',
       '2026-07-13 · Agent X01 策略运行': '2026-07-13 · Agent X01 strategy run',
       '2026-07-12 · 工作流测试': '2026-07-12 · Workflow test',
       '2026-07-10 · 储值到账': '2026-07-10 · Top-up received',
       '订阅付款和算力储值账单统一展示，可按类型筛选。': 'Subscription payments and compute top-ups are shown together and can be filtered by type.',
-      '2026-07-10 · TQX Pro 月费': '2026-07-10 · TQX Pro monthly fee',
+      '2026-07-10 · TQX Basic 月费': '2026-07-10 · TQX Basic monthly fee',
       '2026-06-18 · 算力储值': '2026-06-18 · Compute top-up',
-      '2026-06-10 · TQX Pro 月费': '2026-06-10 · TQX Pro monthly fee',
+      '2026-06-10 · TQX Basic 月费': '2026-06-10 · TQX Basic monthly fee',
       '已付款': 'Paid',
+      '已退款': 'Refunded',
+      '已取消': 'Cancelled',
       '下载账单': 'Download Invoice',
       '平台服务消息与大赛消息分开查看，避免参赛信息被日常通知淹没。': 'View platform and competition messages separately so important competition updates stay visible.',
       '系统通知分类': 'Notification categories',
@@ -1239,7 +2079,7 @@
       '算力余额提醒': 'Compute Balance Alert',
       '可用算力低于设定的提醒阈值。': 'Available compute has fallen below your alert threshold.',
       '订阅续订成功': 'Subscription Renewed',
-      'TQX Pro 已成功续订。': 'TQX Pro was renewed successfully.',
+      'TQX Basic 已成功续订。': 'TQX Basic was renewed successfully.',
       '平台通知全部标记为已读': 'Mark All Platform Notifications as Read',
       'GATC 排名更新': 'GATC Ranking Updated',
       'Agent X01 的实时排名已更新。': "Agent X01's live ranking has been updated.",
@@ -1250,27 +2090,30 @@
       '2 个 Agent 已加入本届大赛。': 'Two Agents have joined this competition.',
       '大赛通知全部标记为已读': 'Mark All Competition Notifications as Read',
       '我的参赛 / 仪表盘': 'My Competition / Dashboard',
-      '集中查看 GATC 参赛状态、实时排名、Performance 和净值曲线。': 'View your GATC entry status, live ranking, performance, and equity curve in one place.',
-      '用户名称：Yazide': 'User: Yazide',
-      '登录状态：已登录': 'Status: Signed in',
-      '查看参赛准备清单': 'View Competition Checklist',
-      '赛事标识 / 赛事入口区域': 'Competition identity / entry area',
+      '查看 GATC 实时排名、积分和净值曲线。': 'View your GATC live ranking, points, and equity curve.',
+      'GATC 2026 · S1': 'GATC 2026 · S1',
       '快捷入口': 'Quick Links',
       '账户与 Agent 管理': 'Account & Agent Management',
-      '工作流管理': 'Workflow Management',
+      '← 返回仪表盘': '← Back to Dashboard',
+      '在当前页面切换账户与 Agent 管理。': 'Switch between Account and Agent Management on this page.',
+      '账户管理': 'Account Management',
+      'Agent 管理': 'Agent Management',
+      'TQX OS': 'TQX OS',
       '参赛 Agent 数据区': 'Competition Agent Data',
-      '参赛 Agent：2 / 3': 'Competition Agents: 2 / 3',
+      '排名：496': 'Rank: 496',
+      '积分：856': 'Points: 856',
+      '当前净值：1.12': 'Current NAV: 1.12',
       '净值曲线数据区域': 'Equity curve data area',
-      '空状态：若用户尚未提交参赛，显示“你还没有参赛 Agent”，并提供“打开参赛准备清单”按钮。': 'Empty state: If no entry has been submitted, show “You do not have a competition Agent yet” with an “Open Competition Checklist” button.',
+      '空状态：若用户尚未提交参赛，则提供“Agent 管理”入口。': 'Empty state: If no entry has been submitted, provide an “Agent Management” link.',
       '我的参赛 / 积分排名': 'My Competition / Points Ranking',
       '查看当前赛季的累积积分、排名变化与积分构成。': 'View cumulative points, ranking changes, and the points breakdown for the current season.',
       '当前赛季': 'Current Season',
-      'GATC HK 2026 · 2026-07-01 至 2026-12-31': 'GATC HK 2026 · 2026-07-01 to 2026-12-31',
+      'GATC 2026 · S1 · 2026-07-01 至 2026-12-31': 'GATC 2026 · S1 · 2026-07-01 to 2026-12-31',
       '进行中': 'In Progress',
-      '我的累积积分': 'My Cumulative Points',
+      '积分与排名': 'Points & Ranking',
       '12,680 分': '12,680 pts',
       '当前排名：28': 'Current Rank: 28',
-      '较上周上升 6 名': 'Up 6 places from last week',
+      '较上周提升 6 名': 'Up 6 places from last week',
       '当前赛季积分榜': 'Current Season Leaderboard',
       '排名': 'Rank',
       '参赛者 / Agent': 'Participant / Agent',
@@ -1285,29 +2128,25 @@
       '赛季任务奖励': 'Season mission rewards',
       '500 分': '500 pts',
       '我的参赛 / 获奖记录': 'My Competition / Awards',
-      '查看本赛季每个季度获得的奖励及领取状态。': 'View quarterly rewards and claim status for this season.',
-      'GATC HK 2026 · 本赛季季度奖励': 'GATC HK 2026 · Quarterly Rewards',
+      '查看本赛季每个季度的奖励计算结果。': 'View quarterly reward calculation results for this season.',
+      'GATC 2026 · 本赛季季度奖励': 'GATC 2026 · Quarterly Rewards',
       '第一季度 · 卓越表现奖': 'Q1 · Outstanding Performance Award',
       '季度积分排名第 12 名': '12th in quarterly points',
-      '已领取': 'Claimed',
-      '查看奖励详情': 'View Reward Details',
+      '查看': 'View',
       '第二季度 · Top 30 奖励': 'Q2 · Top 30 Award',
       '季度积分排名第 28 名': '28th in quarterly points',
-      '待领取': 'Ready to Claim',
-      '领取奖励': 'Claim Reward',
       '第三季度': 'Q3',
-      '季度进行中，奖励将在季度结束后结算。': 'The quarter is in progress. Rewards will be settled after it ends.',
-      '结算中': 'Pending Settlement',
+      '季度进行中，奖励计算中。': 'The quarter is in progress. Rewards are being calculated.',
+      '计算中': 'Calculating',
       '第四季度': 'Q4',
       '尚未开始。': 'Not started yet.',
       '未开始': 'Not Started',
       '本赛季奖励统计': 'Season Reward Summary',
-      '已获奖励：2': 'Rewards Earned: 2',
-      '待领取：1': 'Ready to Claim: 1',
-      '奖金 / 权益：HK$ 3,000': 'Cash / Benefits: HK$ 3,000',
-      '按顺序完成：添加交易账户 → 前往工作流创建 Agent → 返回本页提交 Agent 报名。': 'Complete these steps in order: add a trading account → create an Agent from a workflow → return here to submit the Agent entry.',
-      '1. 账户管理': '1. Account Management',
-      '必须先添加至少一个可用的实盘或仿真盘账户，报名时 Agent 需要绑定该账户。': 'Add at least one available live or simulation account first. Your Agent must be linked to it when entering.',
+      '奖金：HK$ 3,000': 'Prize: HK$ 3,000',
+      '添加和管理实盘或仿真盘账户，参赛 Agent 需要绑定可用账户。': 'Add and manage live or simulation accounts. Competition Agents must be linked to an available account.',
+      '账户与 Agent 管理切换': 'Account and Agent management switcher',
+      '账户列表': 'Account List',
+      '必须先添加至少一个可用账户，报名时 Agent 需要绑定该账户。': 'Add at least one available account first. Your Agent must be linked to it when entering.',
       '+ 添加实盘账户': '+ Add Live Account',
       '+ 添加仿真盘账户': '+ Add Simulation Account',
       '账户名称': 'Account Name',
@@ -1328,8 +2167,8 @@
       '比赛中': 'Competing',
       '已退赛': 'Withdrawn',
       '删除账户': 'Delete account',
-      '2. Agent 管理与报名': '2. Agent Management & Entry',
-      '账户添加完成后，先在工作流管理中创建 Agent；创建完成后返回这里提交报名。': 'After adding an account, create an Agent in Workflow Management, then return here to submit the entry.',
+      'Agent 管理与报名': 'Agent Management & Entry',
+      '账户添加完成后，先在 TQX OS 中创建 Agent；创建完成后返回这里提交报名。': 'After adding an account, create an Agent in TQX OS, then return here to submit the entry.',
       '去工作流创建 Agent': 'Create Agent from Workflow',
       '提交 Agent 报名': 'Submit Agent Entry',
       '主動退赛': 'Withdrawn',
@@ -1359,7 +2198,7 @@
       '编辑 Agent': 'Edit Agent',
       '提交报名': 'Submit Entry',
       '建立和管理交易工作流，完成检视与计算后可用于创建 Agent。': 'Build and manage trading workflows. Review and calculate them before creating an Agent.',
-      '← 返回账户与 Agent 管理': '← Back to Account & Agent Management',
+      '← 返回 Agent 管理': '← Back to Agent Management',
       '官方范本': 'Official Templates',
       '我建立的': 'My Workflows',
       '＋ 建立工作流': '＋ Create Workflow',
@@ -1389,7 +2228,7 @@
       '已有可用账户后，才可以创建和提交参赛 Agent。': 'You need an available account before creating and submitting a competition Agent.',
       '去添加账户': 'Add Account',
       '创建 Agent': 'Create Agent',
-      '通过工作流管理建立并计算工作流，这是 Agent 创建的必经流程。': 'Build and calculate a workflow in Workflow Management before creating an Agent.',
+      '通过 TQX OS 建立并计算工作流，这是 Agent 创建的必经流程。': 'Build and calculate a workflow in TQX OS before creating an Agent.',
       '提交参赛': 'Submit Entry',
       '返回账户与 Agent 管理页，填写 Agent 名称、头像、绑定账户并选择工作流中已创建的 Agent。': 'Return to Account & Agent Management, enter the Agent name and avatar, link an account, and select an Agent created from a workflow.',
       '添加交易账户': 'Add Trading Account',
@@ -1400,7 +2239,7 @@
       '请输入或绑定交易账户': 'Enter or link a trading account',
       '确认添加账户': 'Confirm Account',
       '账户添加成功，可继续前往工作流创建 Agent。': 'Account added. You can now create an Agent from a workflow.',
-      '提交前请确认：已添加可用的实盘或仿真盘账户，并已在工作流管理中创建 Agent。每位用户最多报名 3 个 Agent。': 'Before submitting, make sure you have added an available live or simulation account and created an Agent in Workflow Management. Each user may enter up to three Agents.',
+      '提交前请确认：已添加可用的实盘或仿真盘账户，并已在 TQX OS 中创建 Agent。每位用户最多报名 3 个 Agent。': 'Before submitting, make sure you have added an available live or simulation account and created an Agent in TQX OS. Each user may enter up to three Agents.',
       'Agent 名称': 'Agent Name',
       'Agent 头像': 'Agent Avatar',
       '已创建 Agent': 'Created Agent',
@@ -1469,14 +2308,118 @@
     }
 
     function showPage(id) {
+      if (id !== 'builder') document.body.classList.remove('workflow-module-view');
+      document.body.classList.toggle('competition-management-view', id === 'competition-management');
+      document.body.classList.toggle('trading-account-management-view', id === 'trading-account-management');
       document.querySelectorAll('.wire-page').forEach(function(page) {
         page.classList.add('hidden');
       });
       document.getElementById(id).classList.remove('hidden');
       document.querySelectorAll('.nav button[data-page]').forEach(function(button) {
-        button.classList.toggle('active', button.dataset.page === id);
+        var selectedPage = button.dataset.page === id ||
+          ((id === 'competition-management' || id === 'trading-account-management') && button.dataset.page === 'dashboard');
+        button.classList.toggle('active', selectedPage);
       });
       window.scrollTo(0, 0);
+    }
+    function openCompetitionManagement() {
+      showPage('competition-management');
+    }
+    function openTradingAccountManagement() {
+      showPage('trading-account-management');
+    }
+    function showManagementTab(id) {
+      id = id === 'agent' ? 'agent' : 'account';
+      document.querySelectorAll('.management-panel').forEach(function(panel) {
+        panel.classList.add('hidden');
+      });
+      ['account', 'agent'].forEach(function(tabId) {
+        var tab = document.getElementById('managementTab-' + tabId);
+        var selected = tabId === id;
+        tab.classList.toggle('active', selected);
+        tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+      });
+      document.getElementById('managementPanel-' + id).classList.remove('hidden');
+      window.scrollTo(0, 0);
+    }
+    function openManagement(id) {
+      showPage('account-agent-management');
+      showManagementTab(id);
+    }
+    var competitionToastTimer;
+    function showCompetitionToast(message) {
+      var toast = document.getElementById('competitionToast');
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.remove('hidden');
+      window.clearTimeout(competitionToastTimer);
+      competitionToastTimer = window.setTimeout(function() {
+        toast.classList.add('hidden');
+      }, 2200);
+    }
+    function toggleCompetitionRun(button) {
+      var card = button.closest('.competition-card');
+      var live = card.querySelector('.competition-live');
+      var isRunning = live.textContent.trim() === '执行中';
+      live.textContent = isRunning ? '已暂停' : '执行中';
+      button.textContent = isRunning ? '恢复实例' : '暂停实例';
+      live.style.color = isRunning ? '#9b9da5' : '';
+      showCompetitionToast(isRunning ? '实例已暂停' : '实例已恢复执行');
+    }
+    function withdrawCompetition(button) {
+      var card = button.closest('.competition-card');
+      var live = card.querySelector('.competition-live');
+      live.textContent = '已退赛';
+      live.style.color = '#c85f5f';
+      card.querySelectorAll('.competition-actions button').forEach(function(action) {
+        if (action !== button) action.disabled = true;
+      });
+      button.disabled = true;
+      showCompetitionToast('已退出当前比赛');
+    }
+    function copyCompetitionApiKey() {
+      var apiKey = 'tqx_demo_A91F_2026';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(apiKey).catch(function() {});
+      }
+      showCompetitionToast('API 密钥已复制');
+    }
+    var tradingAccountToastTimer;
+    function showTradingAccountToast(message) {
+      var toast = document.getElementById('tradingAccountToast');
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.remove('hidden');
+      window.clearTimeout(tradingAccountToastTimer);
+      tradingAccountToastTimer = window.setTimeout(function() {
+        toast.classList.add('hidden');
+      }, 2400);
+    }
+    function removeTradingAccount(button) {
+      var row = button.closest('.trading-account-row');
+      var wasConnected = row.dataset.connected === 'true';
+      row.remove();
+      if (wasConnected) {
+        var connected = document.getElementById('connectedAccountCount');
+        var healthy = document.getElementById('healthyAccountCount');
+        connected.textContent = Math.max(0, Number(connected.textContent) - 1);
+        healthy.textContent = Math.max(0, Number(healthy.textContent) - 1);
+      }
+      showTradingAccountToast('账户已删除');
+    }
+    function openWorkflowModule() {
+      var url = new URL(window.location.href);
+      url.hash = 'builder';
+      url.searchParams.set('lang', document.documentElement.lang === 'en' ? 'en' : 'zh');
+      window.open(url.toString(), '_blank');
+    }
+    function returnFromWorkflow() {
+      if (window.opener && !window.opener.closed) {
+        window.opener.focus();
+        window.close();
+        return;
+      }
+      openManagement('agent');
     }
     function showAccountTab(id) {
       document.querySelectorAll('.subscription-panel').forEach(function(panel) {
@@ -1518,7 +2461,7 @@
       document.getElementById('accountCreateSuccess').classList.remove('hidden');
     }
     function openAgentRegistration() {
-      showPage('account-agent');
+      openManagement('agent');
       document.getElementById('agentRegistrationSuccess').classList.add('hidden');
       document.getElementById('agentRegistrationModal').classList.add('active');
     }
@@ -1527,10 +2470,6 @@
     }
     function submitAgentRegistration() {
       document.getElementById('agentRegistrationSuccess').classList.remove('hidden');
-    }
-    function returnToAgentManagement() {
-      showPage('account-agent');
-      document.getElementById('agentManagementSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
     function showWorkflowCreate() {
       document.getElementById('workflowCreate').classList.remove('hidden');
@@ -1544,7 +2483,7 @@
       badge.textContent = hasPlan ? plan : '';
       badge.classList.toggle('hidden', !hasPlan);
     }
-    setSubscriptionPlan('Pro');
+    setSubscriptionPlan('Basic');
     captureOriginalLanguage();
     var savedLanguage = 'zh';
     try { savedLanguage = localStorage.getItem('tqx-language') || 'zh'; } catch (error) {}
@@ -1552,7 +2491,13 @@
     if (queryLanguage === 'en' || queryLanguage === 'zh') savedLanguage = queryLanguage;
     setLanguage(savedLanguage);
     var initialPage = window.location.hash.slice(1);
-    showPage(document.getElementById(initialPage) ? initialPage : 'profile');
+    document.body.classList.toggle('workflow-module-view', initialPage === 'builder');
+    if (initialPage === 'account-management' || initialPage === 'agent-management') {
+      openManagement(initialPage === 'agent-management' ? 'agent' : 'account');
+    } else {
+      showPage(document.getElementById(initialPage) ? initialPage : 'dashboard');
+    }
+    requestAnimationFrame(function() { window.scrollTo(0, 0); });
   </script>
 </body>
 </html>
